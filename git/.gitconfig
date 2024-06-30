@@ -1,0 +1,17 @@
+[user]
+  name = Mark Mekosh
+  email = markmekosh@gmail.com
+[core]
+  excludesfile = ~/.gitignore
+  editor = nvim
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  side-by-side = true
+[push]
+  default = simple
+[alias]
+  tree = log --all --graph --decorate --oneline
+

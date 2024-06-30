@@ -1,0 +1,7 @@
+.DS_Store
+.cache
+
+lazy-lock.json
+lazyvim.json
+
+compile_commands.json
