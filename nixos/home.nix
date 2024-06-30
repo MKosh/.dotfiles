@@ -73,7 +73,7 @@
 
   # Shell
   #programs.zsh.enable = true;
-  #programs.zsh.initExtraFirst = "source ~/.p10k.zsh";
+  programs.zsh.initExtra = "source ~/.p10k.zsh";
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -86,11 +86,11 @@
         src = pkgs.zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
-      {
-        name = "powerlevel10k-config";
-        src = ../zsh/p10k-config;
-        file = "p10k.zsh";
-      }
+#      {
+#        name = "powerlevel10k-config";
+#        src = ./p10k-config;
+#        file = ".p10k.zsh";
+#      }
     ];
 
     oh-my-zsh = {
@@ -98,11 +98,19 @@
       plugins = [ "git" ];
     };
 
-
   };
 
-  #users.defaultUserShell = pkgs.zsh;
-  # programs.zsh.initExtra = "source ~/.p10k.zsh";
+#  programs.git = {
+#    userName = "Mark Mekosh";
+#    userEmail = "markmekosh@gmail.com";
+#    delta = {
+#      enable = true;
+#      options = {
+#        navigate = true;
+#        side-by-side = true;
+#      };
+#    };
+#  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
