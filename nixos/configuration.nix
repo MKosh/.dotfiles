@@ -42,6 +42,11 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  # Service for fn lock on LG Gram
+  services.udev.extraRules = ''
+    SUBSYSTEM=="platform", DRIVER=="lg-laptop", ATTR{fn_lock}="1"
+  '';
+
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
@@ -89,6 +94,12 @@
     ];
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    # Add any missing dynamic libraries for unpackaged programs here
+  ];
+
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -129,6 +140,12 @@
     fzf-git-sh
     delta
     stow
+    ripgrep
+    unzip
+    zip
+    libxkbcommon
+    wayland
+    vlc
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

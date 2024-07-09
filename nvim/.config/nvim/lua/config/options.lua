@@ -8,4 +8,6 @@ vim.o.colorcolumn = "80,120"
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h16"
 vim.g.neovide_input_macos_alt_is_meta = true
 vim.o.autochdir = true
+vim.g.sonokai_style = 'atlantis'
+vim.g.edge_style = 'default'
 -- vim.opt.autochdir = true

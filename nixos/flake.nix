@@ -25,6 +25,29 @@
           modules = [ ./home.nix ];
         };
       };
+      devShells.${system}.default = pkgs.mkShell.override {
+          stdenv = pkgs.clangStdenv;
+        } 
+        {
+          nativeBuildInputs = with pkgs; [
+            clang
+            cmake
+            gnumake
+            libclang
+          ];
+
+          packages = with pkgs; [
+            clang-tools
+            rustc
+            cargo
+            python3
+            glsl_analyzer
+          ];
+
+          shellHook = ''
+            export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.libclang}/resource-root/lib/linux"
+          '';
+        };
     };
 
 }

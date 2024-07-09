@@ -17,11 +17,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
+  home.packages = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -34,6 +30,11 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    xclip
+    wl-clipboard
+    clang-tools
+
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -70,47 +71,47 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+  
+  imports = [
+    ./modules/sh.nix
+  ];
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+    nix-direnv.enable = true;
+  };
 
   # Shell
   #programs.zsh.enable = true;
-  programs.zsh.initExtra = "source ~/.p10k.zsh";
-  programs.zsh = {
-    enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
+#  programs.zsh.initExtra = "source ~/.p10k.zsh";
+#  programs.zsh.initExtra = "source ~/.functions.zsh";
+#  programs.zsh = {
+#    enable = true;
+#    enableCompletion = true;
+#    autosuggestion.enable = true;
+#    syntaxHighlighting.enable = true;
+#
+#    plugins = [
+#      {
+#        name = "powerlevel10k";
+#        src = pkgs.zsh-powerlevel10k;
+#        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+#      }
 #      {
 #        name = "powerlevel10k-config";
 #        src = ./p10k-config;
 #        file = ".p10k.zsh";
 #      }
-    ];
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-    };
-
-  };
-
-#  programs.git = {
-#    userName = "Mark Mekosh";
-#    userEmail = "markmekosh@gmail.com";
-#    delta = {
+#    ];
+#
+#    oh-my-zsh = {
 #      enable = true;
-#      options = {
-#        navigate = true;
-#        side-by-side = true;
-#      };
+#      plugins = [ "git" ];
 #    };
+#
 #  };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

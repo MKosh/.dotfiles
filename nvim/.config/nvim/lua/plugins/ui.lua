@@ -1,18 +1,39 @@
 return {
   {
     "ellisonleao/gruvbox.nvim",
-    -- priority = 1000,
   },
 
   {
     "Mofiqul/vscode.nvim",
-    -- priority = 1001,
+  },
+
+  {
+    "sainnhe/gruvbox-material"
+  },
+
+  {
+    "sainnhe/edge"
+  },
+
+  {
+    "sainnhe/sonokai",
+  },
+
+  {
+    "catppuccin/nvim",
+    -- name = "catppuccin"
+  },
+
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
   },
 
   {
     "LazyVim/LazyVim",
+    -- local latte = require("catppuccin.palettes").get_palettes "macchiato"
     opts = {
-      colorscheme = "vscode",
+      colorscheme = "edge",
     },
   },
 
@@ -32,6 +53,7 @@ return {
 
   {
     "akinsho/bufferline.nvim",
+    enabled = false,
     opts = {
       options = {
         separator_style = "slant",
@@ -47,6 +69,22 @@ return {
         disabled_filetypes = {'alpha', "Neo-tree", 'toggleterm'},
       },
       sections = {
+        lualine_y = {
+          {
+            function()
+              if (vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), 'modified')) then
+                return ""
+                -- return "⦿"▣
+                -- return "◉"
+              else
+                return " "
+              end
+            end,
+            separator = " ",
+          },
+          { "progress", separator = " ", padding = { left = 1, right = 0 } },
+          { "location", padding = { left = 0, right = 1 } },
+        },
         lualine_z = {
             function()
               return " " .. os.date("%a %b %d %I:%M")
