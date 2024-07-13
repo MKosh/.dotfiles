@@ -25,6 +25,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      inlay_hints = { enabled = true, },
       servers = {
         -- Ensure mason installs the server
         clangd = {
@@ -34,7 +35,7 @@ return {
           },
           root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
-              "Makefile",
+              -- "Makefile",
               "configure.ac",
               "configure.in",
               "config.h.in",
@@ -79,9 +80,9 @@ return {
     lazy = true,
     config = function() end,
     opts = {
-      inlay_hints = {
-        inline = false,
-      },
+      -- inlay_hints = {
+      --   inline = false,
+      -- },
       ast = {
         --These require codicons (https://github.com/microsoft/vscode-codicons)
         role_icons = {

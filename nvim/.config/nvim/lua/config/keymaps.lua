@@ -64,6 +64,10 @@ vim.keymap.set('n', '<C-c>', function() require('dap').continue() end,  { silent
 vim.keymap.set('n', '<leader>dm', function() require('dap').list_breakpoints(true) end, { silent = true, desc = 'List breakpoints'})
 
 -- -----------------------------------------------------------------------------
+-- Lsp
+-- vim.keymap.set('n', '<leader>ci', ':vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>', {silent = true, desc = 'Toggle inlay hints'})
+
+-- -----------------------------------------------------------------------------
 -- Oil
 -- vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory'})
 -- vim.keymap.set('n',vim.keymap.set("n", --[[ your key combo --]], function()
@@ -89,9 +93,4 @@ require('telescope').setup{
     }
   }
 }
--- vim.keymap.set('n', '<leader>dm', function() require('nvim-dap-projects').search_project_config() end, {silent = true, desc = 'Search config'})
 
--- vim.keymap.set('n', '<leader>d/', require('telescope').extensions.dap.list_breakpoints{}, {silent = true, desc = 'List breakpoints'})
--- vim.keymap.set('n', '<leader>df', require('telescope').extensions.dap.frames{},           {silent = true, desc = 'frames'})
--- vim.keymap.set('n', '<leader>d/', ':Telescope dap list_breakpoints<CR>', {silent = true, desc = 'List breakpoints'})
--- vim.keymap.set('n', '<leader>df', ':Telescope dap frames<CR>',           {silent = true, desc = 'frames'})

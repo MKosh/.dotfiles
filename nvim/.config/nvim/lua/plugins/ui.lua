@@ -1,28 +1,15 @@
 return {
-  {
     "ellisonleao/gruvbox.nvim",
-  },
 
-  {
     "Mofiqul/vscode.nvim",
-  },
 
-  {
-    "sainnhe/gruvbox-material"
-  },
+    "sainnhe/gruvbox-material",
 
-  {
-    "sainnhe/edge"
-  },
+    "sainnhe/edge",
 
-  {
     "sainnhe/sonokai",
-  },
 
-  {
     "catppuccin/nvim",
-    -- name = "catppuccin"
-  },
 
   {
     "folke/tokyonight.nvim",
@@ -41,7 +28,7 @@ return {
     "folke/which-key.nvim",
     opts = {
       defaults = {
-        ["<leader>h"] = { name = "+harpoon" },
+        -- ["<leader>h"] = { name = "+harpoon" },
         ["<leader>gh"] = { name = "+hunks"},
         ["<leader>m"] = { name = "+make"},
       },
@@ -202,5 +189,27 @@ return {
       { "<tab>", function() require('luasnip').jump(1) end, mode = "s" },
       { "<s-tab>", function() require('luasnip').jump(-1) end, mode = {"i", "s"} },
     },
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "LazyFile",
+    opts = { mode = "cursor", max_lines = 6 },
+    keys = {
+      {
+        "<leader>ut",
+        function()
+          local tsc = require("treesitter-context")
+          tsc.toggle()
+          if LazyVim.inject.get_upvalue(tsc.toggle, "enabled") then
+            LazyVim.info("Enabled Treesitter Context", { title = "Option" })
+          else
+            LazyVim.warn("Disabled Treesitter Context", { title = "Option" })
+          end
+        end,
+        desc = "Toggle Treesitter Context",
+      },
+    },
   }
+
 }
