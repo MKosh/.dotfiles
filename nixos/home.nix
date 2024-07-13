@@ -34,6 +34,7 @@
     xclip
     wl-clipboard
     clang-tools
+    renderdoc
 
   ];
 

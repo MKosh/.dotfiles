@@ -16,7 +16,12 @@ config.keys = {
   -- paste from the clipboard
   { key = 'v', mods = 'CTRL', action = act.PasteFrom 'Clipboard' },
   -- copy from terminal
-  { key = 'c', mods = 'CTRL', action = act.CopyTo 'ClipboardAndPrimarySelection' },
+  { key = 'd', mods = 'CTRL', action = act.CopyTo 'ClipboardAndPrimarySelection' },
 }
+config.colors = {
+  selection_fg = 'none',
+  selection_bg = 'rgba(0% 0% 0% 0%)',
+}
+config.window_background_opacity = 0.95
 
 return config
