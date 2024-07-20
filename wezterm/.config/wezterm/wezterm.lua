@@ -4,7 +4,7 @@ local act = wezterm.action
 local config = {}
 
 config.font = wezterm.font('JetBrains Mono')
-config.font_size = 16
+config.font_size = 12
 -- config.color_scheme = 'Afterglow'
 -- config.color_scheme = 'Sonokai (Gogh)'
 config.color_scheme = 'Edge Dark (base16)'
