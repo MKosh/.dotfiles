@@ -19,4 +19,6 @@ config.keys = {
   { key = 'd', mods = 'CTRL', action = act.CopyTo 'ClipboardAndPrimarySelection' },
 }
 
+-- config.window_background_opacity = 0.95
+
 return config

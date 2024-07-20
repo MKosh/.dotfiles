@@ -27,12 +27,13 @@ return {
   {
     "folke/which-key.nvim",
     opts = {
-      defaults = {
+      spec = {
         -- ["<leader>h"] = { name = "+harpoon" },
         ["<leader>gh"] = { name = "+hunks"},
         ["<leader>m"] = { name = "+make"},
       },
-      window = {
+      win = {
+        no_overlap = false,
         border = "double",
       },
     },
