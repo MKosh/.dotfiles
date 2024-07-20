@@ -50,10 +50,16 @@ vim.keymap.set('n', '<leader>;', ':Dashboard<cr>',            { silent = true, d
 
 -- -----------------------------------------------------------------------------
 -- Hmake
-vim.keymap.set('n', '<leader>ma', ':! hmake all<cr>',            { silent = true, desc = 'hmake all'})
-vim.keymap.set('n', '<leader>mi', ':! hmake install<cr>',        { silent = true, desc = 'hmake install'})
-vim.keymap.set('n', '<leader>mh', ':silent :! hmake all && hmake install<cr>', { silent = true, desc = 'hmake all & install (silent)'})
-vim.keymap.set('n', '<leader>ml', ':! hmake all && hmake install<cr>',         { silent = true, desc = 'hmake all & install (loud)'})
+-- vim.keymap.set('n', '<leader>ma', ':! hmake all<cr>',            { silent = true, desc = 'hmake all'})
+-- vim.keymap.set('n', '<leader>mi', ':! hmake install<cr>',        { silent = true, desc = 'hmake install'})
+-- vim.keymap.set('n', '<leader>mh', ':silent :! hmake all && hmake install<cr>', { silent = true, desc = 'hmake all & install (silent)'})
+-- vim.keymap.set('n', '<leader>ml', ':! hmake all && hmake install<cr>',         { silent = true, desc = 'hmake all & install (loud)'})
+
+-- local wk = require('which-key')
+-- wk.add({
+--   {"<leader>h", group = "ham", },
+--   {"<leader>hp", "", desc = "Pig"}
+-- })
 
 -- -----------------------------------------------------------------------------
 -- Dap
@@ -63,13 +69,6 @@ vim.keymap.set('n', '<C-o>', function() require('dap').step_out() end,  { silent
 vim.keymap.set('n', '<C-c>', function() require('dap').continue() end,  { silent = true, desc = 'Dap - continue' })
 vim.keymap.set('n', '<leader>dm', function() require('dap').list_breakpoints(true) end, { silent = true, desc = 'List breakpoints'})
 
--- -----------------------------------------------------------------------------
--- Oil
--- vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory'})
--- vim.keymap.set('n',vim.keymap.set("n", --[[ your key combo --]], function()
--- vim.cmd("vsplit | wincmd l")
---   require("oil").open()
--- end) '<leader>of', "<CMD>lua require('oil').toggle_float('.')<CR>", { desc = 'Open Oil floating'})
 
 -- -----------------------------------------------------------------------------
 -- Mini.Files

@@ -150,6 +150,7 @@
     libxkbcommon
     wayland
     vlc
+    #root
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

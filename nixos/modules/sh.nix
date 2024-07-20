@@ -6,6 +6,7 @@
   programs.zsh.initExtra = ''
     source ~/.p10k.zsh
     source ~/.functions.zsh
+    source ~/.fzf-git.sh
     export DIRENV_LOG_FORMAT=
   '';
 

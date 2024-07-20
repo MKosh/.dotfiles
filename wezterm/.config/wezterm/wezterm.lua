@@ -22,6 +22,6 @@ config.colors = {
   selection_fg = 'none',
   selection_bg = 'rgba(0% 0% 0% 0%)',
 }
-config.window_background_opacity = 0.95
+-- config.window_background_opacity = 0.95
 
 return config

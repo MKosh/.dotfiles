@@ -41,11 +41,23 @@
             rustc
             cargo
             python3
+            lldb
+            glxinfo
+            mesa
             glsl_analyzer
+            imgui
+            glfw
+            glfw-wayland-minecraft
+            pkg-config
+            nlohmann_json
           ];
 
           shellHook = ''
-            export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.libclang}/resource-root/lib/linux"
+            LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.libclang}/resource-root/lib/linux"
+            LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.wayland}/lib"
+            LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+            export LD_LIBRARY_PATH
+            export IMGUI="${pkgs.imgui}"
           '';
         };
     };
