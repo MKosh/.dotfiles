@@ -13,11 +13,13 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-	    nixosConfigurations = {
-	      nixos = lib.nixosSystem {
+	    nixosConfigurations.lg-gram = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./configuration.nix ];
-	      };
+          modules = [ ./systems/lg-gram/configuration.nix ];
+      };
+	    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./systems/desktop/configuration.nix ];
       };
       homeConfigurations = {
         markm = home-manager.lib.homeManagerConfiguration {
