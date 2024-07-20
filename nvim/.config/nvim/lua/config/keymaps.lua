@@ -88,9 +88,4 @@ require('telescope').setup{
     }
   }
 }
--- vim.keymap.set('n', '<leader>dm', function() require('nvim-dap-projects').search_project_config() end, {silent = true, desc = 'Search config'})
 
--- vim.keymap.set('n', '<leader>d/', require('telescope').extensions.dap.list_breakpoints{}, {silent = true, desc = 'List breakpoints'})
--- vim.keymap.set('n', '<leader>df', require('telescope').extensions.dap.frames{},           {silent = true, desc = 'frames'})
--- vim.keymap.set('n', '<leader>d/', ':Telescope dap list_breakpoints<CR>', {silent = true, desc = 'List breakpoints'})
--- vim.keymap.set('n', '<leader>df', ':Telescope dap frames<CR>',           {silent = true, desc = 'frames'})
