@@ -46,7 +46,7 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
-  #services.xserver.videoDrivers =[ "amdgpu" ];
+  services.xserver.videoDrivers =[ "amdgpu" ];
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -123,9 +123,18 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-#    extraPackages = with pkgs; [
-#      amdvlk
-#    ];
+    extraPackages = with pkgs; [
+      amdvlk
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-extension-layer
+      vulkan-headers
+      vulkan-tools
+      vulkan-helper
+    ];
+    extraPackages32 = with pkgs; [
+      driversi686Linux.amdvlk
+    ];
   };
 
   # List packages installed in system profile. To search, run:

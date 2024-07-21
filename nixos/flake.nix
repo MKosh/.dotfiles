@@ -38,6 +38,16 @@
             libclang
           ];
 
+          buildInputs = with pkgs; [
+            glm
+            glslang
+            shaderc
+            glfw
+            vulkan-headers
+            vulkan-loader
+            vulkan-validation-layers
+          ];
+
           packages = with pkgs; [
             clang-tools
             rustc
@@ -55,9 +65,11 @@
           ];
 
           shellHook = ''
-            LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.libclang}/resource-root/lib/linux"
-            LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.wayland}/lib"
-            LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+            #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.libclang}/resource-root/lib/linux"
+            #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.wayland}/lib"
+            #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+            #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.vulkan-loader}/lib"
+            #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.glfw-wayland-minecraft}/lib"
             export LD_LIBRARY_PATH
             export IMGUI="${pkgs.imgui}"
           '';

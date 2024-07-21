@@ -35,6 +35,12 @@
     wl-clipboard
     clang-tools
     renderdoc
+    vulkan-tools
+    mangohud
+    gamemode
+    #vulkan-loader
+    #vulkan-helper
+    #vulkan-headers
 
   ];
 

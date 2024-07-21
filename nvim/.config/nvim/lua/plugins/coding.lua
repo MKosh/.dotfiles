@@ -1,19 +1,24 @@
 return {
   {
-    'echasnovski/mini.comment',
-    opts = {
-
-    },
-  },
-
-
-  {
     'JoosepAlviste/nvim-ts-context-commentstring',
     opts = {
       languages = {
-        cpp = {__default = "// %s", __multiline = '/* %s */'},
+        -- c = {__default = "// %s", __multiline = '/* %s */'},
+        -- cpp = {__default = "// %s", __multiline = '/* %s */'},
+        cpp = '// %s',
         glsl = "// %s",
       },
+    },
+  },
+
+  {
+    'echasnovski/mini.comment',
+    opts = {
+      options = {
+        custom_commentstring = function ()
+          return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
+        end,
+      }
     },
   },
 

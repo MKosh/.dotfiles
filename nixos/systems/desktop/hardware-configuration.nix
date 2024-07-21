@@ -9,9 +9,10 @@
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [];
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.supportedFilesystems = [ "ntfs" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/009e22b9-9f42-4859-8e1f-dac11423aabe";
@@ -26,7 +27,9 @@
 
   fileSystems."/SSD" = {
     device = "/dev/disk/by-uuid/7E263E9A263E52FF";
-    fsType = "ntfs";
+    fsType = "ntfs-3g";
+    #options = [ "uid=1000" "gid=100" "rw" "user" "exec" "umask=000" ];
+    #options = [ "uid=1000" "gid=100" ];
   };
 
   fileSystems."/Storage" = {
