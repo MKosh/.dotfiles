@@ -78,13 +78,15 @@ require('lspconfig').glsl_analyzer.setup{}
 
 require('telescope').setup{
   defaults = {
+    -- initial_mode = 'normal',
     mappings = {
       n = {
-        ['d'] = require('telescope.actions').delete_buffer
+        ['dd'] = require('telescope.actions').delete_buffer
       },
-      i = {
-        ['<C-d>'] = require('telescope.actions').delete_buffer
-      }
+      -- i = {
+        -- ['<C-d>'] = require('telescope.actions').delete_buffer
+      --   ["<C-d>"] = "delete_buffer",
+      -- }
     }
   }
 }

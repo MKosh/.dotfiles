@@ -60,7 +60,8 @@ return {
         lualine_y = {
           {
             function()
-              if (vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), 'modified')) then
+              -- if (vim.api.nvim_buf_get_option(vim.api.nvim_get_current_buf(), 'modified')) then
+              if (vim.api.nvim_get_option_value('modified', {})) then
                 return ""
                 -- return "⦿"▣
                 -- return "◉"
