@@ -17,6 +17,7 @@
       gdb
 
       # General
+      cmake
       gnumake
       ninja
       nlohmann_json

@@ -162,7 +162,8 @@
     vlc
     ntfs3g
     fuse3
-    #root
+    mangohud
+    gamemode
   ];
 
   programs.steam = {
