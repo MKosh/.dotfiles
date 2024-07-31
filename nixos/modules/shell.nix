@@ -7,9 +7,9 @@
       #   } 
     packages = with pkgs; [
       # C/C++ dev
-      # Clang
-      clang
+      # clang-tools needs to be listed above clang for clangd to work properly
       clang-tools
+      clang
       lldb
 
       # GCC
@@ -34,6 +34,7 @@
       mesa
       glxinfo
       glfw
+      wayland
       # glfw-wayland-minecraft
       glm
       glslang
@@ -45,15 +46,13 @@
       vulkan-validation-layers
     ];
 
-    # shellHook = ''
-    #   #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.libclang}/resource-root/lib/linux"
-    #   LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.wayland}/lib"
-    #   #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/run/opengl-driver/lib:/run/opengl-driver-32/lib"
-    #   #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.vulkan-loader}/lib"
-    #   #LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.glfw-wayland-minecraft}/lib"
-    #   LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.glfw}/lib"
-    #   export LD_LIBRARY_PATH
-    #   export IMGUI="${pkgs.imgui}"
-    # '';
+    shellHook = ''
+    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.wayland}/lib"
+    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+    LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${pkgs.glfw}/lib"
+    export LD_LIBRARY_PATH
+    export IMGUI="${pkgs.imgui}"
+    export GLFW="${pkgs.glfw}"
+    '';
 
   }

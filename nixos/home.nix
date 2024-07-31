@@ -26,7 +26,8 @@
     xclip
     wl-clipboard
     gnuplot
-    clang-tools
+    # spotify
+    nix-prefetch
 
   ];
 
