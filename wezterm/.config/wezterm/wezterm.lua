@@ -9,6 +9,7 @@ local config = {
   -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda
   color_scheme = 'Edge Dark (base16)',
 
+  enable_scroll_bar = true,
   enable_tab_bar = false,
   -- window_decorations = "RESIZE",
   window_background_opacity = 0.8,
