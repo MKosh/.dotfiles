@@ -1,9 +1,19 @@
 local wezterm = require('wezterm')
 
 local act = wezterm.action
+
+local is_darwin = function()
+  return wezterm.target_triple:find("darwin") ~= nil
+end
+
+local size = 12
+if is_darwin() then
+  size = 16
+end
 local config = {
   font = wezterm.font('JetBrains Mono'),
-  font_size = 16,
+  font_size = size,
+
   default_cursor_style = 'BlinkingBar',
 
   -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda
