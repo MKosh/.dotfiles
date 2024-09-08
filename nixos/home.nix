@@ -26,8 +26,11 @@
     xclip
     wl-clipboard
     gnuplot
+    # bear
     # spotify
     nix-prefetch
+    kdePackages.kcachegrind
+    valgrind
 
   ];
 
