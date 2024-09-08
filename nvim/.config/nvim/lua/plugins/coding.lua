@@ -112,6 +112,12 @@ return {
       }
     }
 
+    local file = vim.fn.stdpath("data") .. "/debug-args.txt"
+    local arr = {}
+    for line in io.lines(file) do
+      table.insert(arr, line)
+    end
+
     dap.configurations.cpp = {
       {
         name = "Launch",
@@ -122,23 +128,7 @@ return {
         end,
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
-        args = {
-            'infile=/Users/mmekosh/xrism/data/sequences/100009140/resolve/event_uf/xa100009140rsl_p0px1000_uf.evt.gz',
-            'outfile=/Users/mmekosh/xrism/docs/resources/rslseccor/b8_mods/test_out/100009140/Build8_debug_out.evt',
-            'clobber=yes',
-            'chatter=3',
-            'logfile=/Users/mmekosh/xrism/docs/resources/rslseccor/b8_mods/test_out/100009140/Build8_debug_log.log',
-          -- 'outfileroot=/Users/mmekosh/xrism/temp/rslrmf_crash/rsl_loc_rmfbm01_X_px0_Hp_big',
-          -- 'whichrmf=X',
-          -- 'pixel=0',
-          -- 'resol=Hp',
-          -- 'infile=NONE',
-          -- 'rmfparamfile=CALDB',
-          -- 'chatter=3',
-          -- 'clobber=yes',
-          -- 'debug=yes',
-          -- 'logfile=/Users/mmekosh/xrism/temp/rslrmf_crash/rsl_loc_rmfbm01_X_px0_Hp_big.log'
-        },
+        args = arr,
       },
     }
     local env = function()
