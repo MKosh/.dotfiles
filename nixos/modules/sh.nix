@@ -8,6 +8,11 @@
     source ~/.functions.zsh
     source ~/.fzf-git.sh
     export DIRENV_LOG_FORMAT=
+    export CC=clang
+    export CXX=clang++
+    export FC=gfortran
+    export PERL=perl
+    export PYTHON=python3
   '';
 
   programs.zsh = {
@@ -22,11 +27,6 @@
         src = pkgs.zsh-powerlevel10k;
         file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
-#      {
-#        name = "powerlevel10k-config";
-#        src = ./p10k-config;
-#        file = ".p10k.zsh";
-#      }
     ];
 
     oh-my-zsh = {
@@ -34,6 +34,13 @@
       plugins = [ "git" "direnv" ];
     };
 
+    # sessionVariables = {
+      # CC=clang;
+      # "CXX=clang++";
+      # FC=gfortran;
+      # PERL=perl;
+      # PYTHON=python3;
+    # };
 
   };
 }
