@@ -20,7 +20,8 @@ return {
     "LazyVim/LazyVim",
     -- local latte = require("catppuccin.palettes").get_palettes "macchiato"
     opts = {
-      colorscheme = "edge",
+      -- colorscheme = "edge",
+      colorscheme = "gruvbox-material",
     },
   },
 

@@ -42,11 +42,12 @@ vim.keymap.set('n', '<leader>s/', function()
 -- -----------------------------------------------------------------------------
 -- Editing keymaps
 vim.keymap.set('n', '<leader>cp', '$a # +++ MMM<esc>',         { desc = "Perl my EOL comment"})
-vim.keymap.set('n', '<leader>cc', '$a // +++ MMM<esc>',        { desc = "C++ my EOL comment"})
+vim.keymap.set('n', '<leader>cx', '$a // +++ MMM<esc>',        { desc = "C++ my EOL comment"})
 
 -- -----------------------------------------------------------------------------
 -- General keymaps
-vim.keymap.set('n', '<leader>;', ':Dashboard<cr>',            { silent = true, desc = 'Dashboard'})
+vim.keymap.set('n', '<leader>;', ':Dashboard<cr>', { silent = true, desc = 'Dashboard'})
+vim.keymap.set('n', '<leader>bl', ":!new_note<cr>", { silent = true, desc = 'Open Daily Note'}) -- 
 
 -- -----------------------------------------------------------------------------
 -- Hmake
@@ -54,12 +55,6 @@ vim.keymap.set('n', '<leader>;', ':Dashboard<cr>',            { silent = true, d
 -- vim.keymap.set('n', '<leader>mi', ':! hmake install<cr>',        { silent = true, desc = 'hmake install'})
 -- vim.keymap.set('n', '<leader>mh', ':silent :! hmake all && hmake install<cr>', { silent = true, desc = 'hmake all & install (silent)'})
 -- vim.keymap.set('n', '<leader>ml', ':! hmake all && hmake install<cr>',         { silent = true, desc = 'hmake all & install (loud)'})
-
--- local wk = require('which-key')
--- wk.add({
---   {"<leader>h", group = "ham", },
---   {"<leader>hp", "", desc = "Pig"}
--- })
 
 -- -----------------------------------------------------------------------------
 -- Dap

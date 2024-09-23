@@ -11,6 +11,12 @@ if is_darwin() then
   size = 16
 end
 local config = {
+  initial_rows = 48,
+  initial_cols = 120,
+
+  window_padding = {
+    bottom = 0,
+  },
   font = wezterm.font('JetBrains Mono'),
   font_size = size,
 
@@ -21,9 +27,42 @@ local config = {
 
   enable_scroll_bar = true,
   enable_tab_bar = false,
-  -- window_decorations = "RESIZE",
-  window_background_opacity = 0.8,
-  macos_window_background_blur = 10,
+
+  background = {
+    {
+      source = {
+        Gradient = {
+          orientation = { Linear = { angle = -45.0 } },
+          colors = {
+            '#0f0c29',
+            '#1d1944',
+            '#2c275e',
+            '#302b63',
+            '#32527a', -- Blue band
+            -- '#ad3e16', -- Orange band
+            '#873011', -- Dark Orange band
+            '#24243e',
+            '#0f0c29',
+          },
+          interpolation = 'CatmullRom',
+        },
+      },
+      width = '100%',
+      height= '100%',
+      hsb = {
+        hue = 1.0,
+        saturation = 1.0,
+        brightness = 0.8,
+      },
+    },
+    -- {
+    --   source = { Color = "black"},
+    --   -- source = { Color = 'rgba(50,50,50,0.5)'},
+    --   opacity = 0.3,
+    --   width = '100%',
+    --   height= '100%',
+    -- },
+  },
 
   colors = {
     selection_fg = 'black',
