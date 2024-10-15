@@ -21,6 +21,10 @@
           inherit system;
           modules = [ ./systems/desktop/configuration.nix ];
       };
+	    nixosConfigurations.sl3 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./systems/sl3/configuration.nix ];
+      };
       homeConfigurations = {
         markm = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
