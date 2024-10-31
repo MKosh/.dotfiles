@@ -36,8 +36,31 @@ vim.keymap.set('n', 'dm', ':delmarks ', {desc = "Delete marks"})
 
 -- -----------------------------------------------------------------------------
 -- Telescope
-vim.keymap.set('n', '<leader>s/', function()
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({winblend=10,previewer=false,})) end, { silent = true, desc = "Fuzzy find in current buffer"} )
+vim.keymap.set('n', '<leader>s/',
+  function()
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({winblend=10,previewer=false,}))
+  end,
+  { silent = true, desc = "Fuzzy find in current buffer"}
+)
+
+vim.keymap.set('n', '<leader>fm',
+  function()
+    require('telescope.builtin').marks()
+  end,
+  { desc = "Find marks" }
+)
+
+require('telescope').setup{
+  defaults = {
+    initial_mode = 'normal',
+    mappings = {
+      n = {
+        ['dd'] = require('telescope.actions').delete_buffer
+      },
+    }
+  }
+}
+
 
 -- -----------------------------------------------------------------------------
 -- Editing keymaps
@@ -70,19 +93,4 @@ vim.keymap.set('n', '<leader>dm', function() require('dap').list_breakpoints(tru
 vim.keymap.set('n', '-', function() if not require('mini.files').close() then require('mini.files').open() end end, { desc = "Open Mini.Files"})
 
 require('lspconfig').glsl_analyzer.setup{}
-
-require('telescope').setup{
-  defaults = {
-    -- initial_mode = 'normal',
-    mappings = {
-      n = {
-        ['dd'] = require('telescope.actions').delete_buffer
-      },
-      -- i = {
-        -- ['<C-d>'] = require('telescope.actions').delete_buffer
-      --   ["<C-d>"] = "delete_buffer",
-      -- }
-    }
-  }
-}
 

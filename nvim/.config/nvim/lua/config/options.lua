@@ -10,4 +10,3 @@ vim.g.neovide_input_macos_alt_is_meta = true
 vim.o.autochdir = true
 vim.g.sonokai_style = 'atlantis'
 vim.g.edge_style = 'default'
--- vim.opt.autochdir = true

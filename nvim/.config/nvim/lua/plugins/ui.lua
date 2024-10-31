@@ -26,6 +26,11 @@ return {
   },
 
   {
+    "nvim-neo-tree/neo-tree.nvim",
+    enabled = false
+  },
+
+  {
     "folke/which-key.nvim",
     opts = {
       spec = {
@@ -87,13 +92,14 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = "LazyFile",
+    tag = 'v3.8.2',
     opts = {
       indent = {
-        -- char = "│▏",
         char = "▏",
+      },
+        -- char = "│▏",
         -- tab_char = "▏",
         -- tab_char = "│",
-      },
       scope = { enabled = false },
       exclude = {
         filetypes = {
