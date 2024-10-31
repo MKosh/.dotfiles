@@ -70,6 +70,9 @@
     EDITOR = "nvim";
   };
   
+  home.sessionPath = [
+    "$HOME/utils/"
+  ];
 
   programs.direnv = {
     enable = true;

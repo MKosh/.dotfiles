@@ -6,7 +6,7 @@ local is_darwin = function()
   return wezterm.target_triple:find("darwin") ~= nil
 end
 
-local size = 12
+local size = 11
 if is_darwin() then
   size = 16
 end

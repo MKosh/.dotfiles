@@ -1,4 +1,4 @@
-#!/bin/bash
+
 
 if [[ ! -d $HOME/notes/src ]]; then
   mkdir -p $HOME/notes/src

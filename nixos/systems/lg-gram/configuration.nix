@@ -13,6 +13,11 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  # Added this while troubleshooting no sound on laptop, haven't actually tested
+  boot.extraModprobeConfig=''
+    options snd-hda-intel dmic_detect=0
+  '';
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -150,7 +155,6 @@
     libxkbcommon
     wayland
     vlc
-    #root
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
