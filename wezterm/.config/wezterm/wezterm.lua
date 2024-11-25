@@ -11,7 +11,7 @@ if is_darwin() then
   size = 16
 end
 local config = {
-  initial_rows = 48,
+  initial_rows = 36,
   initial_cols = 120,
 
   window_padding = {
@@ -29,22 +29,69 @@ local config = {
   enable_tab_bar = false,
 
   background = {
+    -- { -- example background file
+    --   source = {
+    --     File = wezterm.config_dir .. '/Firewatch_4k.png',
+    --   },
+    --   height = "Cover",
+    --   width = "Cover",
+    --   hsb = { brightness = 0.1 },
+    -- },
     {
       source = {
         Gradient = {
-          orientation = { Linear = { angle = -45.0 } },
+          -- orientation = { Linear = { angle = 225.0 } },
+          orientation = "Vertical",
+          -- orientation = { Radial = {cx = 1.0, cy = 0.5, radius = 1.0 } },
           colors = {
-            '#0f0c29',
-            '#1d1944',
-            '#2c275e',
-            '#302b63',
-            '#32527a', -- Blue band
-            -- '#ad3e16', -- Orange band
-            '#873011', -- Dark Orange band
-            '#24243e',
-            '#0f0c29',
+            --------------------------------------------------------------------
+            -- Teal Radial gradient
+            -- '#3d6596', -- Brighter Tealish
+            -- '#32527a', -- Tealish band
+            -- '#19293d', -- Dark Tealish
+            -- '#070b11', -- Darker Tealish
+            -- '#0a1119', -- Darkest Tealish
+            --------------------------------------------------------------------
+
+            --------------------------------------------------------------------
+            -- Teal vertical gradient
+            '#19293d', -- Dark Tealish
+            '#32527a', -- Tealish
+            '#19293d', -- Dark Tealish
+            '#070b11', -- Darker Tealish
+            --------------------------------------------------------------------
+
+            --------------------------------------------------------------------
+            -- Original slanted gradient
+            -- '#0f0c29', -- dark dark blue
+            -- '#1d1944',
+            -- '#2c275e',
+            -- '#302b63',
+            -- '#32527a', -- Tealish
+            -- '#873011', -- Dark Orange
+            -- '#24243e',
+            -- '#0f0c29',
+            --------------------------------------------------------------------
+
+            --------------------------------------------------------------------
+            -- Colors
+            -- '#32527a', -- Tealish
+            -- '#3d6596', -- Brighter Tealish
+            -- '#19293d', -- Dark Tealish
+            -- '#070b11', -- Darker Tealish
+            -- '#0a1119', -- Darkest Tealish
+            --
+            -- '#0f0c29', -- dark dark blue
+            -- '#ad3e16', -- Orange
+            -- '#873011', -- Dark Orange
+            --------------------------------------------------------------------
+
+            -- '#19293d',
+            -- '#0d1621',
+            -- '#070b11',
           },
-          interpolation = 'CatmullRom',
+          -- interpolation = 'CatmullRom',
+          interpolation = 'Linear',
         },
       },
       width = '100%',
@@ -52,16 +99,9 @@ local config = {
       hsb = {
         hue = 1.0,
         saturation = 1.0,
-        brightness = 0.8,
+        brightness = 1.0,
       },
     },
-    -- {
-    --   source = { Color = "black"},
-    --   -- source = { Color = 'rgba(50,50,50,0.5)'},
-    --   opacity = 0.3,
-    --   width = '100%',
-    --   height= '100%',
-    -- },
   },
 
   colors = {
