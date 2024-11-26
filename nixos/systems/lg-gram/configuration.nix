@@ -13,7 +13,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # Added this while troubleshooting no sound on laptop, haven't actually tested
   boot.extraModprobeConfig=''
     options snd-hda-intel dmic_detect=0

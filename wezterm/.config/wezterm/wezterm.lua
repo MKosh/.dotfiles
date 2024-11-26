@@ -52,13 +52,24 @@ local config = {
             -- '#070b11', -- Darker Tealish
             -- '#0a1119', -- Darkest Tealish
             --------------------------------------------------------------------
+            --------------------------------------------------------------------
+            -- Blue vertical gradient
+            '#0c1b2a', -- dark blue
+            '#102945', -- darkish blue
+            '#175292', -- medium blue
+            '#102945', -- darkish blue
+            '#0c1b2a', -- dark blue
+            '#081728', -- dark dark blue
 
             --------------------------------------------------------------------
-            -- Teal vertical gradient
-            '#19293d', -- Dark Tealish
-            '#32527a', -- Tealish
-            '#19293d', -- Dark Tealish
-            '#070b11', -- Darker Tealish
+
+            --------------------------------------------------------------------
+            -- Teal vertical gradient... Turns out these aren't really that Teal
+            -- they just look that way on one of my monitors...
+            -- '#19293d', -- Dark Tealish
+            -- '#32527a', -- Tealish
+            -- '#19293d', -- Dark Tealish
+            -- '#070b11', -- Darker Tealish
             --------------------------------------------------------------------
 
             --------------------------------------------------------------------
