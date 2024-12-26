@@ -33,7 +33,8 @@ return {
           -- end
 
           if client.supports_method('textDocument/inlay_hints') then
-            vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+            -- vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+            vim.lsp.inlay_hint.enable(true)
           end
         end,
       })

@@ -43,12 +43,22 @@ set('n', '<C-l>', [[<cmd>wincmd l<CR>]], { silent = true, desc = 'Move window ri
 
 -- -----------------------------------------------------------------------------
 -- Terminal
-set('n', '<M-1>', function() require("snacks").terminal.toggle() end, {})
-set('t', '<M-1>', function() require("snacks").terminal.toggle() end, {})
+-- -----------------------------------------------------------------------------
+-- ToggleTerm
+set("n", "<M-1>", ":ToggleTerm size=10 direction=horizontal<CR>", { silent = true, desc = "Open horizontal terminal"})
+set("n", "<M-2>", ":ToggleTerm size=80 direction=vertical<CR>",   { silent = true, desc = "Open vertical terminal"})
+set("n", "<M-3>", ":ToggleTerm size=30 direction=float<CR>",      { silent = true, desc = "Open floating terminal"})
+set('t', '<esc>', [[<C-\><C-n>]],            { silent = true, desc = 'Exit terminal'})
+set('t', 'jk',    [[<C-\><C-n>]],            { silent = true, desc = 'Exit terminal'})
+set('t', '<M-1>', [[<cmd>ToggleTerm<cr>]],   { silent = true, desc = 'Open horizontal terminal'})
+set('t', '<M-2>', [[<cmd>ToggleTerm<cr>]],   { silent = true, desc = 'Open vertical terminal'})
+set('t', '<M-3>', [[<cmd>ToggleTerm<cr>]],   { silent = true, desc = 'Open floating terminal'})
 set('t', '<C-j>', [[<cmd>wincmd j<CR>]], { silent = true, desc = 'Move window down' })
 set('t', '<C-h>', [[<cmd>wincmd h<CR>]], { silent = true, desc = 'Move window left' })
 set('t', '<C-k>', [[<cmd>wincmd k<CR>]], { silent = true, desc = 'Move window up' })
 set('t', '<C-l>', [[<cmd>wincmd l<CR>]], { silent = true, desc = 'Move window right' })
+-- set('n', '<M-1>', function() require("snacks").terminal.toggle() end, {})
+-- set('t', '<M-1>', function() require("snacks").terminal.toggle() end, {})
 
 -- ------------------------------------------------------------------------------------------------------
 -- fzf-lua
@@ -116,7 +126,22 @@ set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- if vim.lsp.inlay_hint then
 -- Snacks.toggle.inlay_hints():map("<leader>uh")
 -- end
-set("n", "<leader>uh", function() Snacks.toggle.inlay_hints() end, { desc = "Toggle inlay hints" })
-set("n", "<leader>uL", function() Snacks.toggle.option("relativenumber", { name = "Relative Number" }) end, { desc = "Relative Number" })
+-- set("n", "<leader>uh", function() Snacks.toggle.inlay_hints() end, { desc = "Toggle inlay hints" })
+-- set("n", "<leader>uL", function() Snacks.toggle.option("relativenumber", { name = "Relative Number" }) end, { desc = "Relative Number" })
+set("n", "<leader>uh", function()
+    if vim.lsp.inlay_hint.is_enabled() then
+      vim.lsp.inlay_hint.enable(false)
+    else
+      vim.lsp.inlay_hint.enable(true)
+    end
+  end,
+  { desc = "Inlay hints" }
+)
+set("n", "<leader>uL", "<cmd>set relativenumber!<CR>", { desc = "Relative number" })
 set("n", "<leader>ua", function() Snacks.toggle.line_number() end, { desc = "Line Number" })
 -- set("n", "<leader>ul", function() if vim.opt.relativenumber == true then vim.opt.relativenumber = false else vim.opt.relativenumber = true end end, { desc = "Rel nums" })
+-- floating terminal
+-- set("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+-- set("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
+-- set("n", "<c-/>",      function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
+-- set("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "which_key_ignore" })

@@ -11,5 +11,6 @@ vim.opt.colorcolumn = "80,120"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = true
 vim.opt.ignorecase = true
+vim.opt.wrap = false
 -- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- vim.opt.autoformat = false
