@@ -1,15 +1,17 @@
 local set = vim.keymap.set
-set('n', '-', function() if not require('mini.files').close() then require('mini.files').open() end end,
-  { desc = "Open Mini.Files" })
-set('n', '<leader>qq', ":q<CR>", { desc = "Quit" })
-set('n', '<leader>qw', ":wq<CR>", { desc = "Save and Quit" })
 
--- set('n', '<esc>', ":nohl<CR>", { silent = true, desc = "No Highlight"})
+-- -----------------------------------------------------------------------------
+-- General
+set('n', '<leader>qq', ":qa<CR>", { desc = "Quit all" })
+set('n', '<leader>qw', ":wq<CR>", { desc = "Save and Quit" })
 set({ "n", "i", "s" }, '<esc>', function()
   vim.cmd("noh")
   return "<esc>"
 end, { silent = true, expr = true, desc = "No Highlight" })
 
+-- -----------------------------------------------------------------------------
+-- Mini
+set('n', '-', function() if not require('mini.files').close() then require('mini.files').open() end end, { desc = "Open Mini.Files" })
 
 -- -----------------------------------------------------------------------------
 -- Buffers
@@ -43,6 +45,9 @@ set('n', '<C-l>', [[<cmd>wincmd l<CR>]], { silent = true, desc = 'Move window ri
 
 -- -----------------------------------------------------------------------------
 -- Terminal
+-- set('n', '<M-1>', function() require("snacks").terminal.toggle() end, {})
+-- set('t', '<M-1>', function() require("snacks").terminal.toggle() end, {})
+
 -- -----------------------------------------------------------------------------
 -- ToggleTerm
 set("n", "<M-1>", ":ToggleTerm size=10 direction=horizontal<CR>", { silent = true, desc = "Open horizontal terminal"})
@@ -57,8 +62,6 @@ set('t', '<C-j>', [[<cmd>wincmd j<CR>]], { silent = true, desc = 'Move window do
 set('t', '<C-h>', [[<cmd>wincmd h<CR>]], { silent = true, desc = 'Move window left' })
 set('t', '<C-k>', [[<cmd>wincmd k<CR>]], { silent = true, desc = 'Move window up' })
 set('t', '<C-l>', [[<cmd>wincmd l<CR>]], { silent = true, desc = 'Move window right' })
--- set('n', '<M-1>', function() require("snacks").terminal.toggle() end, {})
--- set('t', '<M-1>', function() require("snacks").terminal.toggle() end, {})
 
 -- ------------------------------------------------------------------------------------------------------
 -- fzf-lua
@@ -73,24 +76,47 @@ set('n', '<leader>fg', function() require('fzf-lua').live_grep() end, { desc = "
 set('n', '<leader>fo', function() require('fzf-lua').oldfiles() end, { desc = "Oldfiles" })
 set('n', '<leader>fq', function() require('fzf-lua').quickfix() end, { desc = "Quickfix" })
 set('n', '<leader>fc', function() require('fzf-lua').command_history() end, { desc = "Command History" })
+set('n', '<leader>f/',
+  function()
+    -- local lsp = require("lspconfig")
+    -- local root_dir = function(fname)
+    --   return lsp.util.root_pattern(
+    --     "configure.ac",
+    --     "configure.in",
+    --     "config.h.in",
+    --     "meson.build",
+    --     "meson_options.txt",
+    --     "build.ninja"
+    --   )(fname) or lsp.util.root_pattern("compile_commands.json", "compile_flags.txt")
+    --    (fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true})[1])
+    --  end,
 
+    require('fzf-lua').live_grep({cwd = vim.lsp.buf.list_workspace_folders()[1]})
+  end, { desc = "Grep root dir" })
+
+-- -----------------------------------------------------------------------------
 -- commenting
 set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
 set("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
+-- -----------------------------------------------------------------------------
 -- Lazy
 set("n", "<leader>l", "<cmd>Lazy<CR>", { desc = "Lazy" })
 
+-- -----------------------------------------------------------------------------
 -- Quick fix
 set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
 set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
+-- -----------------------------------------------------------------------------
 -- Snacks Dashboard
 set("n", "<leader>;", function() Snacks.dashboard() end, { desc = "Dashboard" })
 
+-- -----------------------------------------------------------------------------
 -- Mason
 set("n", "<leader>m", "<cmd>Mason<cr>", { desc = "Mason" })
 
+-- -----------------------------------------------------------------------------
 -- diagnostic
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
@@ -107,6 +133,37 @@ set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
+-- -----------------------------------------------------------------------------
+-- Lspconfig
+set('n', 'gd', '<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
+set('n', 'gr', '<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
+set('n', 'gI', '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
+set('n', 'gy', '<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
+
+-- -----------------------------------------------------------------------------
+-- Dap
+set('n', '<C-n>', function() require('dap').step_over() end, { silent = true, desc = 'Dap - step over' })
+set('n', '<C-s>', function() require('dap').step_into() end, { silent = true, desc = 'Dap - step into' })
+set('n', '<C-o>', function() require('dap').step_out() end,  { silent = true, desc = 'Dap - step out' })
+set('n', '<C-c>', function() require('dap').continue() end,  { silent = true, desc = 'Dap - continue' })
+set('n', '<leader>dm', function() require('dap').list_breakpoints(true) end, { silent = true, desc = 'List breakpoints'})
+
+-- -----------------------------------------------------------------------------
+-- Toggle -  I can't get Snacks.Toogle to work, so I'm just doing a few simple toggles manually
+set("n", "<leader>uh", function()
+    if vim.lsp.inlay_hint.is_enabled() then
+      vim.lsp.inlay_hint.enable(false)
+    else
+      vim.lsp.inlay_hint.enable(true)
+    end
+  end,
+  { desc = "Inlay hints" }
+)
+set("n", "<leader>uL", "<cmd>set relativenumber!<CR>", { desc = "Relative number" })
+set("n", "<leader>ua", function() Snacks.toggle.line_number() end, { desc = "Line Number" })
+
+-- -----------------------------------------------------------------------------
+-- Snacks - These snacks keymaps don't seem to be working 
 -- Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
 -- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
 -- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
@@ -128,17 +185,6 @@ set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 -- end
 -- set("n", "<leader>uh", function() Snacks.toggle.inlay_hints() end, { desc = "Toggle inlay hints" })
 -- set("n", "<leader>uL", function() Snacks.toggle.option("relativenumber", { name = "Relative Number" }) end, { desc = "Relative Number" })
-set("n", "<leader>uh", function()
-    if vim.lsp.inlay_hint.is_enabled() then
-      vim.lsp.inlay_hint.enable(false)
-    else
-      vim.lsp.inlay_hint.enable(true)
-    end
-  end,
-  { desc = "Inlay hints" }
-)
-set("n", "<leader>uL", "<cmd>set relativenumber!<CR>", { desc = "Relative number" })
-set("n", "<leader>ua", function() Snacks.toggle.line_number() end, { desc = "Line Number" })
 -- set("n", "<leader>ul", function() if vim.opt.relativenumber == true then vim.opt.relativenumber = false else vim.opt.relativenumber = true end end, { desc = "Rel nums" })
 -- floating terminal
 -- set("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })

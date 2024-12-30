@@ -4,8 +4,9 @@ return {
     lazy = false,
     opts_extend = { "spec" },
     opts = {
+      preset = "modern",
       win = {
-        border = "double",
+        border = "single",
       },
       spec = {
         {
@@ -18,6 +19,7 @@ return {
           { "<leader>x", group = "Quickfix" },
           { "<leader>d", group = "Debug" },
           { "<leader>u", group = "UI" },
+          { "<leader>r", group = "Run" },
         }
       },
     },
