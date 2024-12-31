@@ -9,7 +9,9 @@ return {
       notifier  = { enabled = true },
       terminal  = { enabled = true },
       bufdelete = { enabled = true },
-      toggle = { enabled = true },
+      -- statuscolumn = { enabled = true },
+      -- words = { enabled = true },
+      -- toggle = { enabled = true },
       -- toggle    = {
       --   opts = {
       --     map = vim.keymap.set,
@@ -29,7 +31,6 @@ return {
       -- terminal = { enabled = true,
       --   win = { position = "float" },
       -- },
-      -- statuscolumn = { enabled = true},
       dashboard = {
 
         sections = {

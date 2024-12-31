@@ -2,6 +2,10 @@ local set = vim.keymap.set
 
 -- -----------------------------------------------------------------------------
 -- General
+
+set("n", "<space>rf", "<cmd>source %<CR>", { desc = "Run file"})
+set("n", "<space>rl", ":.lua<CR>", { desc = "Run line" })
+set("v", "<space>r", ":lua<CR>")
 set('n', '<leader>qq', ":qa<CR>", { desc = "Quit all" })
 set('n', '<leader>qw', ":wq<CR>", { desc = "Save and Quit" })
 set({ "n", "i", "s" }, '<esc>', function()

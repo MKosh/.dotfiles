@@ -4,9 +4,9 @@ return {
     'echasnovski/mini.nvim',
     version = '*',
     config = function()
-	    local statusline = require('mini.statusline').setup({
-        use_icons = true
-      })
+	    -- local statusline = require('mini.statusline').setup({
+	    --    use_icons = true
+	    --  })
 	    local files = require('mini.files').setup({})
 	    local icons = require('mini.icons').setup({})
       local ai    = require('mini.ai').setup({})
