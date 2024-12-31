@@ -2,54 +2,17 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
     build = ":TSUpdate",
-    config = function()
-      local treesitter = require('nvim-treesitter.configs')
-      treesitter.setup({
-        highlight = { enabled = true },
-        indent = { enabled = true },
-        ensure_installed = {
-          "bash",
-          "c",
-          "cpp",
-          "diff",
-          "html",
-          "javascript",
-          "jsdoc",
-          "json",
-          "jsonc",
-          "lua",
-          "luadoc",
-          "luap",
-          "markdown",
-          "markdown_inline",
-          "printf",
-          "python",
-          "query",
-          "regex",
-          "toml",
-          "tsx",
-          "typescript",
-          "vim",
-          "vimdoc",
-          "xml",
-          "yaml",
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
+    config = function ()
+      local configs = require("nvim-treesitter.configs")
 
-      })
-    end,
+      configs.setup({
+          ensure_installed = { "c", "cpp", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
+          sync_install = false,
+          highlight = { enable = true },
+          indent = { enable = true },
+        })
+    end
   },
 
   {
