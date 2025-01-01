@@ -39,8 +39,8 @@ require("lazy").setup({
 
 vim.cmd.colorscheme "catppuccin-macchiato"
 
-require('config.keymaps')
 require('config.options')
+require('config.keymaps')
 require('config.load')
 require('config.autocmds')
 

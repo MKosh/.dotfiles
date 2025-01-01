@@ -67,36 +67,66 @@ set('t', '<C-h>', [[<cmd>wincmd h<CR>]], { silent = true, desc = 'Move window le
 set('t', '<C-k>', [[<cmd>wincmd k<CR>]], { silent = true, desc = 'Move window up' })
 set('t', '<C-l>', [[<cmd>wincmd l<CR>]], { silent = true, desc = 'Move window right' })
 
+-- -----------------------------------------------------------------------------
+-- Telescope
+if PICKER == "telescope" then
+  local ts_builtin = require('telescope.builtin')
+  vim.keymap.set('n', '<leader>s/',
+    function()
+      require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({winblend=10,previewer=false,}))
+    end,
+    { silent = true, desc = "Fuzzy find in current buffer"}
+  )
+
+  vim.keymap.set('n', '<leader>fm',
+    function()
+      require('telescope.builtin').marks()
+    end,
+    { desc = "Find marks" }
+  )
+  set('n', '<leader>ff', function() ts_builtin.git_files() end, { desc = "Files (git)" })
+  set('n', '<leader>fF', function() ts_builtin.find_files() end, { desc = "Files (cwd)" })
+  set('n', '<leader>fb', function() ts_builtin.buffers() end, { desc = "Buffers" })
+  set('n', '<leader>fm', function() ts_builtin.marks() end, { desc = "Marks" })
+  set('n', '<leader>fC', function() ts_builtin.colorscheme() end, { desc = "Colorschemes" })
+  set('n', '<leader>fj', function() ts_builtin.jumplist() end, { desc = "Jumps" })
+  set('n', '<leader>fr', function() ts_builtin.registers() end, { desc = "Registers" })
+  set('n', '<leader>fp', function() ts_builtin.profiles() end, { desc = "Profiles" })
+  set('n', '<leader>fg', function() ts_builtin.live_grep() end, { desc = "Grep" })
+  set('n', '<leader>fo', function() ts_builtin.oldfiles() end, { desc = "Oldfiles" })
+  set('n', '<leader>fq', function() ts_builtin.quickfix() end, { desc = "Quickfix" })
+  set('n', '<leader>fc', function() ts_builtin.command_history() end, { desc = "Command History" })
+  set('n', '<leader>fv', function() ts_builtin.vim_options() end, { desc = "Vim Options" })
+  set('n', '<leader>fk', function() ts_builtin.keymaps() end, { desc = "Keymaps" })
+  set('n', '<leader>fs', function() ts_builtin.lsp_document_symbols() end, { desc = "Symbols" })
+  set('n', 'gd', function() ts_builtin.lsp_definitions() end, { desc = "Goto Defintion" })
+  set('n', 'gr', function() ts_builtin.lsp_references() end, { desc = "Goto References" })
+  set('n', 'gI', function() ts_builtin.lsp_implementations() end, { desc = "Goto Implementations" })
+  set('n', 'gy', function() ts_builtin.lsp_type_definitions() end, { desc = "Goto Typedefs" })
+end
+
 -- ------------------------------------------------------------------------------------------------------
 -- fzf-lua
-set('n', '<leader>ff', function() require('fzf-lua').files() end, { desc = "Files" })
-set('n', '<leader>fb', function() require('fzf-lua').buffers() end, { desc = "Buffers" })
-set('n', '<leader>fm', function() require('fzf-lua').marks() end, { desc = "Marks" })
-set('n', '<leader>fC', function() require('fzf-lua').colorschemes() end, { desc = "Colorschemes" })
-set('n', '<leader>fj', function() require('fzf-lua').jumps() end, { desc = "Jumps" })
-set('n', '<leader>fr', function() require('fzf-lua').registers() end, { desc = "Registers" })
-set('n', '<leader>fp', function() require('fzf-lua').profiles() end, { desc = "Profiles" })
-set('n', '<leader>fg', function() require('fzf-lua').live_grep() end, { desc = "Grep" })
-set('n', '<leader>fo', function() require('fzf-lua').oldfiles() end, { desc = "Oldfiles" })
-set('n', '<leader>fq', function() require('fzf-lua').quickfix() end, { desc = "Quickfix" })
-set('n', '<leader>fc', function() require('fzf-lua').command_history() end, { desc = "Command History" })
-set('n', '<leader>f/',
-  function()
-    -- local lsp = require("lspconfig")
-    -- local root_dir = function(fname)
-    --   return lsp.util.root_pattern(
-    --     "configure.ac",
-    --     "configure.in",
-    --     "config.h.in",
-    --     "meson.build",
-    --     "meson_options.txt",
-    --     "build.ninja"
-    --   )(fname) or lsp.util.root_pattern("compile_commands.json", "compile_flags.txt")
-    --    (fname) or vim.fs.dirname(vim.fs.find('.git', { path = fname, upward = true})[1])
-    --  end,
-
-    require('fzf-lua').live_grep({cwd = vim.lsp.buf.list_workspace_folders()[1]})
-  end, { desc = "Grep root dir" })
+if PICKER == "fzf-lua" then
+  set('n', '<leader>ff', function() require('fzf-lua').files() end, { desc = "Files" })
+  set('n', '<leader>fb', function() require('fzf-lua').buffers() end, { desc = "Buffers" })
+  set('n', '<leader>fm', function() require('fzf-lua').marks() end, { desc = "Marks" })
+  set('n', '<leader>fC', function() require('fzf-lua').colorschemes() end, { desc = "Colorschemes" })
+  set('n', '<leader>fj', function() require('fzf-lua').jumps() end, { desc = "Jumps" })
+  set('n', '<leader>fr', function() require('fzf-lua').registers() end, { desc = "Registers" })
+  set('n', '<leader>fp', function() require('fzf-lua').profiles() end, { desc = "Profiles" })
+  set('n', '<leader>fg', function() require('fzf-lua').live_grep() end, { desc = "Grep" })
+  set('n', '<leader>fo', function() require('fzf-lua').oldfiles() end, { desc = "Oldfiles" })
+  set('n', '<leader>fq', function() require('fzf-lua').quickfix() end, { desc = "Quickfix" })
+  set('n', '<leader>fc', function() require('fzf-lua').command_history() end, { desc = "Command History" })
+  set('n', '<leader>fs', function() require('fzf-lua').lsp_document_symbols() end, { desc = "Symbols" })
+  set('n', '<leader>fd', function() require('fzf-lua').lsp_document_diagnostics() end, { desc = "Diagnostics" })
+  set('n', '<leader>f/', function() require('fzf-lua').live_grep({cwd = vim.lsp.buf.list_workspace_folders()[1]}) end, { desc = "Grep root dir" })
+  set('n', 'gd', '<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
+  set('n', 'gr', '<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto References" })
+  set('n', 'gI', '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Implementations" })
+  set('n', 'gy', '<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Typedefs" })
+end
 
 -- -----------------------------------------------------------------------------
 -- commenting
@@ -136,13 +166,6 @@ set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
--- -----------------------------------------------------------------------------
--- Lspconfig
-set('n', 'gd', '<cmd>FzfLua lsp_definitions     jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
-set('n', 'gr', '<cmd>FzfLua lsp_references      jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
-set('n', 'gI', '<cmd>FzfLua lsp_implementations jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
-set('n', 'gy', '<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Defintion" })
 
 -- -----------------------------------------------------------------------------
 -- Dap
