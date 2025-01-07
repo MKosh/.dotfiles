@@ -23,7 +23,6 @@ return {
           },
           { function() -- Either show git directory or cwd
               local name = vim.fn.fnamemodify(vim.fs.dirname(vim.fs.find('.git', { upward = true })[1]), ":t")
-              print(name)
               if name ~= 'v:null' then
                 return name
               else

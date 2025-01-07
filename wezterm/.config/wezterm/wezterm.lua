@@ -22,7 +22,7 @@ local config = {
 
   default_cursor_style = 'BlinkingBar',
 
-  -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda, Edge Dark (base16)
+  -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda, Edge Dark (base16), nord
   color_scheme = 'nord',
 
   enable_scroll_bar = true,

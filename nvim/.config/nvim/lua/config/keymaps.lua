@@ -19,10 +19,10 @@ set('n', '-', function() if not require('mini.files').close() then require('mini
 
 -- -----------------------------------------------------------------------------
 -- Buffers
-set('n', '<leader>bs', ":w<CR>", { desc = "Save buffer" })
-set("n", "<leader>bn", ":bnext<cr>", { silent = true, desc = "Next" })
-set("n", "<leader>bb", ":bprevious<cr>", { silent = true, desc = "Back" })
-set("n", "<leader>bc", ":bd<cr>", { silent = true, desc = "Close buffer" })
+set('n', '<leader>bs', "<cmd>w<CR>", { desc = "Save buffer" })
+set("n", "<leader>bn", "<cmd>bnext<cr>", { silent = true, desc = "Next" })
+set("n", "<leader>bb", "<cmd>bprevious<cr>", { silent = true, desc = "Back" })
+set("n", "<leader>bc", "<cmd>bd<cr>", { silent = true, desc = "Close buffer" })
 set("n", "<leader>bd", function() Snacks.bufdelete() end, { desc = "Delete buffer" })
 set("n", "<leader>bo", function() Snacks.bufdelete.other() end, { desc = "Delete other buffers" })
 set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Prev Buffer" })
