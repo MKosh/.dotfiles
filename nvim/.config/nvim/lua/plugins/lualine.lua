@@ -21,7 +21,15 @@ return {
               info  = " ",
             },
           },
-          { function() return vim.fn.fnamemodify(vim.fs.dirname(vim.fs.find('.git', { upward = true })[1]), ":t") end },
+          { function() -- Either show git directory or cwd
+              local name = vim.fn.fnamemodify(vim.fs.dirname(vim.fs.find('.git', { upward = true })[1]), ":t")
+              print(name)
+              if name ~= 'v:null' then
+                return name
+              else
+                return vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+              end
+            end },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", file_status = false },
         },
