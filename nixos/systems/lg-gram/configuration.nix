@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, wezterm-flake, ... }:
 
 {
   imports =
@@ -125,18 +125,21 @@
   	(nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  # OpenGl
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+  hardware.graphics = {
+      enable = true;
   };
+  # OpenGl
+  # hardware.opengl = {
+    # enable = true;
+    # driSupport = true;
+    # driSupport32Bit = true;
+  # };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    wezterm
-    neovim
+    # wezterm
+    # neovim
     vim
     wget
     git
@@ -155,6 +158,7 @@
     libxkbcommon
     wayland
     vlc
+    wezterm-flake.packages.${pkgs.system}.default
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
