@@ -21,7 +21,8 @@ return {
     -- local latte = require("catppuccin.palettes").get_palettes "macchiato"
     opts = {
       -- colorscheme = "edge",
-      colorscheme = "gruvbox-material",
+      -- colorscheme = "gruvbox-material",
+      colorscheme = "catppuccin-macchiato",
     },
   },
 
@@ -61,8 +62,12 @@ return {
     opts = {
       options = {
         disabled_filetypes = {'alpha', "Neo-tree", 'toggleterm'},
+        section_separators = { left = '', right = '' },
+        -- component_separators = { left = '', right = ''},
+        component_separators = { left = '', right = ''},
       },
       sections = {
+        lualine_a = { {'mode', separator = { left = '' }, right_padding = 2 } },
         lualine_y = {
           {
             function()
@@ -81,10 +86,14 @@ return {
           { "location", padding = { left = 0, right = 1 } },
         },
         lualine_z = {
+          {
             function()
               return " " .. os.date("%a %b %d %I:%M")
             end,
-        }
+            separator = { right = '' },
+            left_padding = 2,
+          },
+        },
       }
     },
   },
