@@ -13,6 +13,7 @@ return {
     },
     config = function()
       require('lspconfig').lua_ls.setup({})
+      require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
       require('lspconfig').clangd.setup({
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {
