@@ -19,4 +19,4 @@ opt.confirm = true
 -- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- vim.opt.autoformat = false
 
-PICKER = "fzf-lua"
+PICKER = "mini"

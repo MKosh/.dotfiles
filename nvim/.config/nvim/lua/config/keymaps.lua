@@ -2,7 +2,6 @@ local set = vim.keymap.set
 
 -- -----------------------------------------------------------------------------
 -- General
-
 set("n", "<space>rf", "<cmd>source %<CR>", { desc = "Run file"})
 set("n", "<space>rl", ":.lua<CR>", { desc = "Run line" })
 set("v", "<space>r", ":lua<CR>")
@@ -128,6 +127,80 @@ if PICKER == "fzf-lua" then
   set('n', 'gy', '<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Typedefs" })
 end
 
+if PICKER == "mini" then
+  local mini_pick_wipeout_buffers = function()
+    local pick = require("mini.pick")
+    local items_to_remove = {}
+
+    local picker_items = pick.get_picker_items() or {}
+    local picker_matches = pick.get_picker_matches() or {}
+    local picker_marked = picker_matches.marked_inds
+
+    if picker_marked ~= nil and next(picker_marked) ~= nil then
+      items_to_remove = picker_marked
+      table.sort(items_to_remove, function(x, y)
+        return x > y
+      end)
+    else
+      table.insert(items_to_remove, picker_matches.current_ind)
+    end
+
+    local remaining_items = vim.deepcopy(picker_items)
+    for _, ind in ipairs(items_to_remove) do
+      local bufnr = picker_items[ind].bufnr
+      vim.api.nvim_buf_delete(bufnr, {})
+      if not vim.api.nvim_buf_is_loaded(bufnr) then
+        vim.print("removing buffer " .. bufnr)
+        table.remove(remaining_items, ind)
+      end
+    end
+
+    pick.set_picker_items(remaining_items, {})
+  end
+  local wipeout_cur = function()
+    vim.api.nvim_buf_delete(MiniPick.get_picker_matches().current.bufnr, {})
+    MiniPick.refresh()
+    -- local items = MiniPick.get_picker_items()
+    -- MiniPick.set_picker_items(items, {})
+  end
+  local root_dir = function ()
+    local name = vim.fs.dirname(vim.fs.find('.git', { upward = true })[1])
+    print(name)
+    if name ~= nil then
+      return name
+    else
+      return vim.fn.getcwd()
+        -- vim.lsp.buf.list_workspace_folders()[1]
+    end
+  end
+  local buffer_mappings = { wipeout = { char = '<C-z>', func = mini_pick_wipeout_buffers } }
+  set('n', '<leader>ff', "<cmd>Pick files<CR>", { desc = "Files" })
+  set('n', '<leader>fb', function () MiniPick.builtin.buffers({}, { mappings = buffer_mappings }) end, { desc = "Buffers" })
+  set('n', '<leader>fi', '<cmd>Pick buf_lines scope="current" preserve_order=true<CR>', { desc = "In buffer" })
+  set('n', '<leader>fm', '<cmd>Pick marks<CR>', { desc = "Marks" })
+  -- set('n', '<leader>fC', '<cmd>Pick <CR>', { desc = "Colorschemes" })
+  set('n', '<leader>fj', '<cmd>Pick list scope="jump"<CR>', { desc = "Jumps" })
+  set('n', '<leader>fr', '<cmd>Pick registers<CR>', { desc = "Registers" })
+  set('n', '<leader>fS', '<cmd>Pick spellsuggest<CR>', { desc = "Spelling" })
+  -- set('n', '<leader>fp', '<cmd>Pick <CR>', { desc = "Profiles" })
+  set('n', '<leader>fk', '<cmd>Pick keymaps<CR>', { desc = "Keymaps" })
+  set('n', '<leader>fg', function() MiniPick.builtin.grep_live(nil, {source={cwd=root_dir()}}) end, { desc = "Grep Live" })
+  set('n', '<leader>fG', function() MiniPick.builtin.grep(nil, {source={cwd=root_dir()}}) end, { desc = "Grep" })
+  set('n', '<leader>fo', '<cmd>Pick oldfiles<CR>', { desc = "Oldfiles" })
+  set('n', '<leader>fq', '<cmd>Pick list scope="quickfix"<CR>', { desc = "Quickfix" })
+  set('n', '<leader>fC', '<cmd>Pick list scope="changelist"<CR>', { desc = "Quickfix" })
+  set('n', '<leader>fc', '<cmd>Pick history<CR>', { desc = "Command History" })
+  set('n', '<leader>fs', '<cmd>Pick lsp scope="document_symbol"<CR>', { desc = "Symbols" })
+  set('n', '<leader>fd', '<cmd>Pick diagnostic<CR>', { desc = "Diagnostics" })
+  set('n', '<leader>f/', '<cmd>Pick <CR>', { desc = "Grep root dir" })
+  set('n', '<leader>fa', '<cmd>Pick git_files<CR>', { desc = "Git Files" })
+  set('n', '<leader>fh', '<cmd>Pick git_hunks<CR>', { desc = "Git Hunks" })
+  set('n', 'gd', '<cmd>Pick lsp scope="definition"<CR>', { desc = "Goto Defintion" })
+  set('n', 'gr', '<cmd>Pick lsp scope="references"<CR>', { desc = "Goto References" })
+  set('n', 'gI', '<cmd>Pick lsp scope="implementation"<CR>', { desc = "Goto Implementations" })
+  set('n', 'gy', '<cmd>Pick lsp scope="type_definition"<CR>', { desc = "Goto Typedefs" })
+end
+
 -- -----------------------------------------------------------------------------
 -- commenting
 set("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
@@ -175,6 +248,8 @@ set('n', '<C-o>', function() require('dap').step_out() end,  { silent = true, de
 set('n', '<C-c>', function() require('dap').continue() end,  { silent = true, desc = 'Dap - continue' })
 set('n', '<leader>dm', function() require('dap').list_breakpoints(true) end, { silent = true, desc = 'List breakpoints'})
 
+-- LSP
+set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Source/Header"})
 -- -----------------------------------------------------------------------------
 -- Toggle -  I can't get Snacks.Toogle to work, so I'm just doing a few simple toggles manually
 set("n", "<leader>uh", function()
