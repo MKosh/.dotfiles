@@ -20,4 +20,4 @@ opt.laststatus = 3
 -- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- vim.opt.autoformat = false
 
-PICKER = "mini.pick" -- options: telescope, fzf-lua, mini
+PICKER = "snacks.pick" -- options: telescope.nvim, fzf-lua, mini.pick, snacks.pick

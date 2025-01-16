@@ -8,7 +8,95 @@ return {
       scratch   = { enabled = true },
       notifier  = { enabled = true },
       terminal  = { enabled = true },
-      -- bufdelete = { enabled = true },
+      bufdelete = { enabled = true },
+      layout    = { enabled = true },
+      picker = {
+        enabled = true,
+        layout = "ivy",
+        -- layouts = {
+        --   { "ivy",
+        --     box = "vertical",
+        --     backdrop = false,
+        --     row = -1,
+        --     width = 0,
+        --     height = 0.4,
+        --     border = "top",
+        --     title = " {source} {live}",
+        --     title_pos = "left",
+        --     { win = "input", height = 1, border = "bottom" },
+        --     {
+        --       box = "horizontal",
+        --       { win = "list", border = "none" },
+        --       { win = "preview", width = 0.6, border = "left" },
+        --     },
+        --   }, { "dropdown", {
+        --       backdrop = false,
+        --       row = 1,
+        --       width = 0.4,
+        --       min_width = 80,
+        --       height = 0.8,
+        --       border = "none",
+        --       box = "vertical",
+        --       { win = "preview", height = 0.4, border = "rounded" },
+        --       {
+        --         box = "vertical",
+        --         border = "rounded",
+        --         title = "{source} {live}",
+        --         title_pos = "center",
+        --         { win = "input", height = 1, border = "bottom" },
+        --         { win = "list", border = "none" },
+        --       },
+        --     }
+        --   }, { "vscode", {
+        --       backdrop = false,
+        --       row = 1,
+        --       width = 0.4,
+        --       min_width = 80,
+        --       height = 0.4,
+        --       border = "none",
+        --       box = "vertical",
+        --       { win = "input", height = 1, border = "rounded", title = "{source} {live}", title_pos = "center" },
+        --       { win = "list", border = "hpad" },
+        --       { win = "preview", border = "rounded" },
+        --     }
+        --   }, { "select", {
+        --       preview = false,
+        --       backdrop = false,
+        --       width = 0.5,
+        --       min_width = 80,
+        --       height = 0.4,
+        --       min_height = 10,
+        --       box = "vertical",
+        --       border = "rounded",
+        --       title = "Select",
+        --       title_pos = "center",
+        --       { win = "input", height = 1, border = "bottom" },
+        --       { win = "list", border = "none" },
+        --       { win = "preview", height = 0.4, border = "top" },
+        --     }
+        --   },
+        -- },
+        -- layout = "select",
+        },
+      -- Toggle ----------------------------------------------------------------
+      toggle    = {
+        enabled = true,
+        map = vim.keymap.set, -- keymap.set function to use
+        which_key = true, -- integrate with which-key to show enabled/disabled icons and colors
+        notify = true, -- show a notification when toggling
+        -- icons for enabled/disabled states
+        icon = {
+          enabled = " ",
+          disabled = " ",
+        },
+        -- colors for enabled/disabled states
+        color = {
+          enabled = "green",
+          disabled = "yellow",
+        },
+      },
+      -- Toggle ----------------------------------------------------------------
+      -- dashboard ----------------------------------------------------------------
       dashboard = {
         sections = {
           { section = "header" },
@@ -37,12 +125,12 @@ return {
           { section = "startup" },
         },
       },
+      -- dashboard ----------------------------------------------------------------
     },
     keys = {
       { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
       { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
       { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
-      -- { "<leader>uh", function() Snacks.toggle.inlay_hints() end, desc = "Inlay hints" },
       -- { "<leader>uL", function() Snacks.toggle.option("relativenumber") end, desc = "Relative number" }
       -- { "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
       -- { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },

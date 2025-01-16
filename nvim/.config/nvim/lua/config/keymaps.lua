@@ -1,5 +1,13 @@
 local set = vim.keymap.set
 
+local root_dir = function() -- Either show git directory or cwd
+  local name = vim.fs.dirname(vim.fs.find('.git', { upward = true })[1])
+  if name ~= nil then
+    return name
+  else
+    return vim.fn.getcwd()
+  end
+end
 -- -----------------------------------------------------------------------------
 -- General
 set("n", "<space>rf", "<cmd>source %<CR>", { desc = "Run file"})
@@ -252,90 +260,89 @@ set('n', '<leader>dm', function() require('dap').list_breakpoints(true) end, { s
 set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Source/Header"})
 -- -----------------------------------------------------------------------------
 -- Toggle -  I can't get Snacks.Toogle to work, so I'm just doing a few simple toggles manually
-set("n", "<leader>uh", function()
-    if vim.lsp.inlay_hint.is_enabled() then
-      vim.lsp.inlay_hint.enable(false)
-    else
-      vim.lsp.inlay_hint.enable(true)
-    end
-  end,
-  { desc = "Inlay hints" }
-)
-set("n", "<leader>uL", "<cmd>set relativenumber!<CR>", { desc = "Relative number" })
-set("n", "<leader>ua", function() Snacks.toggle.line_number() end, { desc = "Line Number" })
+-- set("n", "<leader>uh", function()
+--     if vim.lsp.inlay_hint.is_enabled() then
+--       vim.lsp.inlay_hint.enable(false)
+--       print("Inlay hints disabled")
+--     else
+--       vim.lsp.inlay_hint.enable(true)
+--       print("Inlay hints enabled")
+--     end
+--   end,
+--   { desc = "Inlay hints" }
+-- )
+-- set("n", "<leader>uL", "<cmd>set relativenumber!<CR>", { desc = "Relative number" })
+-- set("n", "<leader>uz", function () Snacks.toggle.inlay_hints() end, { desc = "IH" })
 
 -- -----------------------------------------------------------------------------
--- Snacks - These snacks keymaps don't seem to be working 
--- Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
--- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
--- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
--- Snacks.toggle.diagnostics():map("<leader>ud")
--- Snacks.toggle.line_number():map("<leader>ul")
--- Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
--- Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
--- Snacks.toggle.treesitter():map("<leader>uT")
--- Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
--- Snacks.toggle.dim():map("<leader>uD")
--- Snacks.toggle.animate():map("<leader>ua")
--- Snacks.toggle.indent():map("<leader>ug")
--- Snacks.toggle.scroll():map("<leader>uS")
--- Snacks.toggle.profiler():map("<leader>dpp")
--- Snacks.toggle.profiler_highlights():map("<leader>dph")
--- local Snacks = require('Snacks')
--- if vim.lsp.inlay_hint then
--- Snacks.toggle.inlay_hints():map("<leader>uh")
--- end
--- set("n", "<leader>uh", function() Snacks.toggle.inlay_hints() end, { desc = "Toggle inlay hints" })
--- set("n", "<leader>uL", function() Snacks.toggle.option("relativenumber", { name = "Relative Number" }) end, { desc = "Relative Number" })
--- set("n", "<leader>ul", function() if vim.opt.relativenumber == true then vim.opt.relativenumber = false else vim.opt.relativenumber = true end end, { desc = "Rel nums" })
+-- Snacks - Snacks.toggle seems to be working now??
+Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
+Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
+Snacks.toggle.diagnostics():map("<leader>ud")
+Snacks.toggle.line_number():map("<leader>ul")
+Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2, name = "Conceal Level" }):map("<leader>uc")
+Snacks.toggle.option("showtabline", { off = 0, on = vim.o.showtabline > 0 and vim.o.showtabline or 2, name = "Tabline" }):map("<leader>uA")
+Snacks.toggle.treesitter():map("<leader>uT")
+Snacks.toggle.option("background", { off = "light", on = "dark" , name = "Dark Background" }):map("<leader>ub")
+Snacks.toggle.dim():map("<leader>uD")
+Snacks.toggle.animate():map("<leader>ua")
+Snacks.toggle.indent():map("<leader>ug")
+Snacks.toggle.scroll():map("<leader>uS")
+Snacks.toggle.profiler():map("<leader>dpp")
+Snacks.toggle.profiler_highlights():map("<leader>dph")
+
+if vim.lsp.inlay_hint then
+  Snacks.toggle.inlay_hints():map("<leader>uh")
+end
+
+if PICKER == "snacks.pick" then
+  set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" } )
+  set('n', "<leader>/", function() Snacks.picker.grep({hidden = true, dirs = {root_dir()} }) print(root_dir()) end, { desc = "Grep" } )
+  set('n', "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" } )
+  set('n', "<leader><space>", function() Snacks.picker.files({hidden=true}) end, {desc = "Find Files" })
+  -- find
+  set('n', "<leader>sb", function() Snacks.picker.buffers() end, {desc = "Buffers"} )
+  set('n', "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config")[1] } ) end, { desc = "Find Config File" } )
+  set('n', "<leader>sf", function() Snacks.picker.files({hidden = true}) end, { desc = "Find Files" })
+  set('n', "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
+  set('n', "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent"  })
+  -- git
+  set('n', "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Git Log" } )
+  set('n', "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+  -- Grep
+  set('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" } )
+  set('n', "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" } )
+  set('n', "<leader>sg", function() Snacks.picker.grep({hidden=true}) end, { desc = "Grep" } )
+  set({'n', 'v'}, "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word" } )
+  -- search
+  set('n', '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" } )
+  set('n', "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" } )
+  set('n', "<leader>sc", function() Snacks.picker.command_history() end, { desc = "Command History" } )
+  set('n', "<leader>sC", function() Snacks.picker.commands() end, { desc = "Commands" } )
+  set('n', "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" } )
+  set('n', "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" } )
+  set('n', "<leader>sH", function() Snacks.picker.highlights() end, { desc = "Highlights" } )
+  set('n', "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" } )
+  set('n', "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" } )
+  set('n', "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" } )
+  set('n', "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" } )
+  set('n', "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" } )
+  set('n', "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" } )
+  set('n', "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" } )
+  set('n', "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" } )
+  set('n', "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" } )
+  -- LSP
+  set('n', "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" } )
+  set('n', "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" } )
+  set('n', "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" } )
+  set('n', "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" } )
+  set('n', "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" } )
+end
+
 -- floating terminal
 -- set("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
 -- set("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
 -- set("n", "<c-/>",      function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
 -- set("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "which_key_ignore" })
 --
--- Try these keymaps for Snacks
-
-set('n', "<leader>uh", function() Snacks.toggle.inlay_hints() end, { desc = "Inlay hints" } )
-set('n', "<leader>uL", function() Snacks.toggle.option("relativenumber") end, { desc = "Relative number" } )
-set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" } )
-set('n', "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" } )
-set('n', "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" } )
-set('n', "<leader><space>", function() Snacks.picker.files() end, {desc = "Find Files" })
--- find
-set('n', "<leader>sb", function() Snacks.picker.buffers() end, {desc = "Buffers"} )
--- set('n', "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") ) end, { desc = "Find Config File" } )
-set('n', "<leader>sf", function() Snacks.picker.files({hidden = true}) end, { desc = "Find Files" })
-set('n', "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
-set('n', "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent"  })
--- git
-set('n', "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Git Log" } )
-set('n', "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
--- Grep
-set('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" } )
--- set('n', "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" } )
-set('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" } )
--- set('n', "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word", mode = { "n", "x" } } )
--- search
-set('n', '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" } )
-set('n', "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" } )
-set('n', "<leader>sc", function() Snacks.picker.command_history() end, { desc = "Command History" } )
-set('n', "<leader>sC", function() Snacks.picker.commands() end, { desc = "Commands" } )
-set('n', "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" } )
-set('n', "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" } )
-set('n', "<leader>sH", function() Snacks.picker.highlights() end, { desc = "Highlights" } )
-set('n', "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" } )
-set('n', "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" } )
-set('n', "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" } )
-set('n', "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" } )
-set('n', "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" } )
-set('n', "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" } )
-set('n', "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" } )
-set('n', "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" } )
-set('n', "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" } )
--- LSP
-set('n', "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" } )
-set('n', "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" } )
-set('n', "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" } )
-set('n', "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" } )
-set('n', "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" } )
