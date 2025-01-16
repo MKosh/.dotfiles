@@ -3,11 +3,13 @@ return {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
+        globalstatus = true,
         disabled_filetypes = {'alpha', "Neo-tree", 'toggleterm'},
         section_separators = { left = '', right = '' },
         -- component_separators = { left = '', right = ''},
         component_separators = { left = '', right = ''},
       },
+      disabled_buftypes = {'dap-repl'},
       sections = {
         lualine_a = { {'mode', separator = { left = '' }, right_padding = 2 } },
         lualine_b = { 'branch' },
@@ -40,6 +42,10 @@ return {
               modified = " ",
               removed  = " ",
             }
+          },
+          {
+            function() return "  " .. require("dap").status() end,
+            cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
           },
         },
         lualine_y = {

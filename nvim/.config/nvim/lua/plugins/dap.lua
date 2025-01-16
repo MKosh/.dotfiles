@@ -1,38 +1,18 @@
 return {
   {
-    "rcarriga/nvim-dap-ui",
-    dependencies = { "nvim-neotest/nvim-nio" },
-    -- stylua: ignore
-    keys = {
-      { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
-      { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
-    },
-    opts = {},
-    config = function(_, opts)
-      local dap = require("dap")
-      local dapui = require("dapui")
-      dapui.setup(opts)
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open({})
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close({})
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close({})
-      end
-    end,
-  },
-
-  {
     "mfussenegger/nvim-dap",
-
+    dependencies = {
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        opts = {},
+      },
+    },
     keys = {
       { "<leader>d", "", desc = "+debug", mode = {"n", "v"} },
       { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
       { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
       { "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-      { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
+      -- { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
       { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
       { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
       { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
@@ -47,69 +27,165 @@ return {
       { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
     },
-
     config = function()
-    local Config = require("lazyvim.config")
-    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-
-    for name, sign in pairs(Config.icons.dap) do
-      sign = type(sign) == "table" and sign or { sign }
-      vim.fn.sign_define(
-        "Dap" .. name,
-        { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-      )
-    end
-    local dap = require('dap')
-
-    dap.adapters.lldb = {
-      type = 'executable',
-      -- command = '/usr/bin/lldb-vscode',
-      command = '/opt/local/bin/lldb-vscode-mp-15',
-      name = 'lldb',
-    }
-
-    -- dap.adapters.cpptools = {
-    --   type = 'executable',
-    --   command = '/Users/mmekosh/.local/share/nvim/mason/bin/OpenDebugAD7',
-    --   name = 'cpptools',
-    -- }
-
-    -- dap.adapters.codelldb = {
-    --   type = 'server',
-    --   port = "${port}",
-    --   executable = {
-    --     command = 'codelldb',
-    --     -- command = '/Users/mmekosh/.local/share/nvim/mason/bin/codelldb',
-    --     args = {"--port", "${port}"},
-    --   }
-    -- }
-
-    local file = vim.fn.stdpath("data") .. "/debug-args.txt"
-    local arr = {}
-    for line in io.lines(file) do
-      table.insert(arr, line)
-    end
-
-    dap.configurations.cpp = {
-      {
-        name = "Launch",
-        type = "codelldb",
-        request = "launch",
-        program = function()
-          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-        args = arr,
-      },
-    }
-    local env = function()
-      local variables = {}
-      for k, v in pairs(vim.fn.environ()) do
-        table.insert(variables, string.format("%s=%s", k, v))
+      -- local Config = require("lazyvim.config")
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+      local icons = {
+        Stopped             = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+        Breakpoint          = {" "},
+        BreakpointCondition = { " " },
+        BreakpointRejected  = { " ", "DiagnosticError" },
+        LogPoint            = { ".>" },
+      }
+      for name, sign in pairs(icons) do
+        -- sign = type(sign) == "table" and sign or { sign }
+        vim.fn.sign_define(
+          "Dap" .. name,
+          { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+        )
       end
-      return variables
-    end
-  end,
+      local dap = require('dap')
+
+      dap.adapters.lldb = {
+        type = 'executable',
+        command = '/opt/local/bin/lldb-vscode-mp-15',
+        name = 'lldb',
+      }
+
+      dap.adapters.codelldb = {
+        type = 'server',
+        port = "${port}",
+        executable = {
+          command = 'codelldb',
+          -- command = '/Users/mmekosh/.local/share/nvim/mason/bin/codelldb',
+          args = {"--port", "${port}"},
+        }
+      }
+
+      require("mason-nvim-dap").setup({
+        automatic_installation = true,
+        handlers = {},
+        ensure_installed = {
+          'codelldb',
+        },
+      })
+
+      local file = vim.fn.stdpath("data") .. "/debug-args.txt"
+      local arr = {}
+      for line in io.lines(file) do
+        table.insert(arr, line)
+      end
+
+      dap.configurations.cpp = {
+        {
+          name = "Launch",
+          type = "codelldb",
+          request = "launch",
+          program = function()
+            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+          end,
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
+          args = arr,
+        },
+      }
+      local env = function()
+        local variables = {}
+        for k, v in pairs(vim.fn.environ()) do
+          table.insert(variables, string.format("%s=%s", k, v))
+        end
+        return variables
+      end
+    end,
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "mfussenegger/nvim-dap","nvim-neotest/nvim-nio" },
+    lazy = false,
+    enable = true,
+    opts = {
+      layouts = { {
+        elements = { {
+          id = "watches",
+          size = 0.25
+        }, {
+            id = "breakpoints",
+            size = 0.25
+          }, {
+            id = "scopes",
+            size = 0.5
+          } },
+        position = "left",
+        size = 40
+      }, {
+          elements = { {
+            id = "repl",
+            size = 0.5
+          }, {
+              id = "console",
+              size = 0.5
+            } },
+          position = "bottom",
+          size = 10
+        } },
+    },
+    keys = {
+      { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+      { "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
+      { "<leader>dS", function() require("dapui").float_element("stacks", {title = "Stack Frames", position="center", width = 80, height = 5, enter = true}) end, desc = "Stacks" },
+    },
+    config = function(_, opts)
+      local dap = require("dap")
+      local dapui = require("dapui")
+      dapui.setup(opts)
+      --
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+      --
+      -- dap.listeners.after.event_initialized["dapui_config"] = function()
+      --   dapui.open({})
+      -- end
+      -- dap.listeners.before.event_terminated["dapui_config"] = function()
+      --   dapui.close({})
+      -- end
+      -- dap.listeners.before.event_exited["dapui_config"] = function()
+      --   dapui.close({})
+      -- end
+    end,
+  },
+
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = "mason.nvim",
+    cmd = { "DapInstall", "DapUninstall" },
+    -- opts = {
+    --   -- Makes a best effort to setup the various debuggers with
+    --   -- reasonable debug configurations
+    --   automatic_installation = true,
+    --
+    --   -- You can provide additional configuration to the handlers,
+    --   -- see mason-nvim-dap README for more information
+    --   handlers = {},
+    --
+    --   -- You'll need to check that you have the required things installed
+    --   -- online, please don't ask me how to install them :)
+    --   ensure_installed = {
+    --     'codelldb',
+    --     -- Update this to ensure that you have the debuggers for the langs you want
+    --   },
+    -- },
+    -- mason-nvim-dap is loaded when nvim-dap loads
+    config = function() end,
   },
 }

@@ -16,7 +16,8 @@ opt.cursorline = true
 opt.ignorecase = true
 opt.wrap = false
 opt.confirm = true
+opt.laststatus = 3
 -- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- vim.opt.autoformat = false
 
-PICKER = "mini"
+PICKER = "mini.pick" -- options: telescope, fzf-lua, mini

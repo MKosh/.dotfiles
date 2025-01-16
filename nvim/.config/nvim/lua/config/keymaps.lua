@@ -68,7 +68,7 @@ set('t', '<C-l>', [[<cmd>wincmd l<CR>]], { silent = true, desc = 'Move window ri
 
 -- -----------------------------------------------------------------------------
 -- Telescope
-if PICKER == "telescope" then
+if PICKER == "telescope.nvim" then
   local ts_builtin = require('telescope.builtin')
   vim.keymap.set('n', '<leader>s/',
     function()
@@ -127,7 +127,7 @@ if PICKER == "fzf-lua" then
   set('n', 'gy', '<cmd>FzfLua lsp_typedefs        jump_to_single_result=true ignore_current_line=true<cr>', { desc = "Goto Typedefs" })
 end
 
-if PICKER == "mini" then
+if PICKER == "mini.pick" then
   local mini_pick_wipeout_buffers = function()
     local pick = require("mini.pick")
     local items_to_remove = {}
@@ -293,3 +293,49 @@ set("n", "<leader>ua", function() Snacks.toggle.line_number() end, { desc = "Lin
 -- set("n", "<leader>ft", function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
 -- set("n", "<c-/>",      function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "Terminal (Root Dir)" })
 -- set("n", "<c-_>",      function() Snacks.terminal(nil, { cwd = LazyVim.root() }) end, { desc = "which_key_ignore" })
+--
+-- Try these keymaps for Snacks
+
+set('n', "<leader>uh", function() Snacks.toggle.inlay_hints() end, { desc = "Inlay hints" } )
+set('n', "<leader>uL", function() Snacks.toggle.option("relativenumber") end, { desc = "Relative number" } )
+set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" } )
+set('n', "<leader>/", function() Snacks.picker.grep() end, { desc = "Grep" } )
+set('n', "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" } )
+set('n', "<leader><space>", function() Snacks.picker.files() end, {desc = "Find Files" })
+-- find
+set('n', "<leader>sb", function() Snacks.picker.buffers() end, {desc = "Buffers"} )
+-- set('n', "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") ) end, { desc = "Find Config File" } )
+set('n', "<leader>sf", function() Snacks.picker.files({hidden = true}) end, { desc = "Find Files" })
+set('n', "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
+set('n', "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent"  })
+-- git
+set('n', "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Git Log" } )
+set('n', "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
+-- Grep
+set('n', "<leader>sb", function() Snacks.picker.lines() end, { desc = "Buffer Lines" } )
+-- set('n', "<leader>sB", function() Snacks.picker.grep_buffers() end, { desc = "Grep Open Buffers" } )
+set('n', "<leader>sg", function() Snacks.picker.grep() end, { desc = "Grep" } )
+-- set('n', "<leader>sw", function() Snacks.picker.grep_word() end, { desc = "Visual selection or word", mode = { "n", "x" } } )
+-- search
+set('n', '<leader>s"', function() Snacks.picker.registers() end, { desc = "Registers" } )
+set('n', "<leader>sa", function() Snacks.picker.autocmds() end, { desc = "Autocmds" } )
+set('n', "<leader>sc", function() Snacks.picker.command_history() end, { desc = "Command History" } )
+set('n', "<leader>sC", function() Snacks.picker.commands() end, { desc = "Commands" } )
+set('n', "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Diagnostics" } )
+set('n', "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Pages" } )
+set('n', "<leader>sH", function() Snacks.picker.highlights() end, { desc = "Highlights" } )
+set('n', "<leader>sj", function() Snacks.picker.jumps() end, { desc = "Jumps" } )
+set('n', "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps" } )
+set('n', "<leader>sl", function() Snacks.picker.loclist() end, { desc = "Location List" } )
+set('n', "<leader>sM", function() Snacks.picker.man() end, { desc = "Man Pages" } )
+set('n', "<leader>sm", function() Snacks.picker.marks() end, { desc = "Marks" } )
+set('n', "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" } )
+set('n', "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" } )
+set('n', "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" } )
+set('n', "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" } )
+-- LSP
+set('n', "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" } )
+set('n', "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" } )
+set('n', "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" } )
+set('n', "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" } )
+set('n', "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" } )
