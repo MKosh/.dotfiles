@@ -61,6 +61,10 @@ return {
     lazy = false,
     config = function()
       require('nordic').load()
+      -- require('nordic').setup({
+      --   bright_border = true,
+      -- })
+
     end
   },
 
@@ -68,5 +72,21 @@ return {
     "sainnhe/everforest",
     lazy = false,
   },
+
+  {
+    "sainnhe/gruvbox-material",
+  },
+
+  {
+    "sainnhe/edge",
+  },
+
+  {
+    "sainnhe/sonokai",
+  },
+
+  {
+    "Mofiqul/vscode.nvim",
+  }
 
 }

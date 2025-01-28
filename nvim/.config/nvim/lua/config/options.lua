@@ -21,3 +21,7 @@ opt.laststatus = 3
 -- vim.opt.autoformat = false
 
 PICKER = "snacks.pick" -- options: telescope.nvim, fzf-lua, mini.pick, snacks.pick
+vim.g.edge_enable_italic = true
+vim.g.edge_style = "neon"
+vim.g.sonokai_style = "atlantis"
+vim.g.sonokai_enable_italic = true

@@ -171,16 +171,16 @@ if PICKER == "mini.pick" then
     -- local items = MiniPick.get_picker_items()
     -- MiniPick.set_picker_items(items, {})
   end
-  local root_dir = function ()
-    local name = vim.fs.dirname(vim.fs.find('.git', { upward = true })[1])
-    print(name)
-    if name ~= nil then
-      return name
-    else
-      return vim.fn.getcwd()
-        -- vim.lsp.buf.list_workspace_folders()[1]
-    end
-  end
+  -- local root_dir = function ()
+  --   local name = vim.fs.dirname(vim.fs.find('.git', { upward = true })[1])
+  --   print(name)
+  --   if name ~= nil then
+  --     return name
+  --   else
+  --     return vim.fn.getcwd()
+  --       -- vim.lsp.buf.list_workspace_folders()[1]
+  --   end
+  -- end
   local buffer_mappings = { wipeout = { char = '<C-z>', func = mini_pick_wipeout_buffers } }
   set('n', '<leader>ff', "<cmd>Pick files<CR>", { desc = "Files" })
   set('n', '<leader>fb', function () MiniPick.builtin.buffers({}, { mappings = buffer_mappings }) end, { desc = "Buffers" })
@@ -300,7 +300,7 @@ if PICKER == "snacks.pick" then
   set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" } )
   set('n', "<leader>/", function() Snacks.picker.grep({hidden = true, dirs = {root_dir()} }) print(root_dir()) end, { desc = "Grep" } )
   set('n', "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" } )
-  set('n', "<leader><space>", function() Snacks.picker.files({hidden=true}) end, {desc = "Find Files" })
+  set('n', "<leader><space>", function() Snacks.picker.files({hidden=true, dirs = {root_dir()}}) end, {desc = "Find Files" })
   -- find
   set('n', "<leader>sb", function() Snacks.picker.buffers() end, {desc = "Buffers"} )
   set('n', "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config")[1] } ) end, { desc = "Find Config File" } )
