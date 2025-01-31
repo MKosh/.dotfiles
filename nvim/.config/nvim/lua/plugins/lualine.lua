@@ -36,6 +36,13 @@ return {
         },
 
         lualine_x = {
+          {
+            function ()
+              local reg = vim.fn.reg_recording()
+              if reg == "" then return "" end -- not recording
+              return "recording to " .. reg
+            end,
+          },
           { "diff",
             symbols = {
               added    = " ",
