@@ -12,12 +12,14 @@ return {
         {
           mode = { "n", "v" },
           { "<leader>q", group = "Quit" },
-          { "<leader>f", group = "Fzf" },
+          { "<leader>g", group = "Git" },
+          { "<leader>f", group = "Files/Dirs" },
           { "<leader>b", group = "Buffer" },
           { "<leader>c", group = "Code" },
           { "<leader>w", group = "Windows" },
           { "<leader>x", group = "Quickfix" },
           { "<leader>d", group = "Debug" },
+          { "<leader>s", group = "Search" },
           { "<leader>u", group = "UI" },
           { "<leader>r", group = "Run" },
         }

@@ -5,7 +5,7 @@ return {
       "folke/lazydev.nvim",
       ft = "lua",
       opts = {
-        inlay_hints = { enabled = true },
+        inlay_hints = { enabled = false },
         library = {
           { path = "${3rd}/luv/library", words = { "vim%.uv" } },
           { path = "lazy.nvim", words = { "LazyVim" } },
@@ -17,6 +17,8 @@ return {
       require('lspconfig').lua_ls.setup({})
       require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
       require('lspconfig').cmake.setup({})
+      require('lspconfig').texlab.setup({})
+      -- require('lspconfig').tectonic.setup({})
       require('lspconfig').clangd.setup({
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {
@@ -64,7 +66,7 @@ return {
 
           if client.supports_method('textDocument/inlay_hints') then
             -- vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-            vim.lsp.inlay_hint.enable(true)
+            vim.lsp.inlay_hint.enable(false)
           end
 
           vim.diagnostic.config({

@@ -19,6 +19,10 @@ set({ "n", "i", "s" }, '<esc>', function()
   vim.cmd("noh")
   return "<esc>"
 end, { silent = true, expr = true, desc = "No Highlight" })
+set('n', '<leader>ff', "<cmd>lua print(vim.fn.getcwd())<CR>", { desc = "Current working dir" })
+set('n', '<leader>fd', "<cmd>lua print(vim.fn.expand('%:p:h'))<CR>", { desc = "Current buffer's dir" })
+set('n', '<leader>fc', "<cmd>chdir %:p:h<CR>", { desc = "Change to buf's dir" })
+-- set('n', '<leader>fc', "<cmd>lua vim.api.nvim_set_current_dir(vim.fn.expand('%:p:h'))<CR>", { desc = "Change to buf's dir" })
 
 -- -----------------------------------------------------------------------------
 -- Mini
