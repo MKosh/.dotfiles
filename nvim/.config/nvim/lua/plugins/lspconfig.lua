@@ -17,6 +17,7 @@ return {
       require('lspconfig').lua_ls.setup({})
       require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
       require('lspconfig').cmake.setup({})
+      require('lspconfig').zls.setup({})
       require('lspconfig').texlab.setup({})
       -- require('lspconfig').tectonic.setup({})
       require('lspconfig').clangd.setup({
