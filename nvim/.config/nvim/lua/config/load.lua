@@ -1,1 +1,1 @@
-require('lspconfig').glsl_analyzer.setup{}
+require('snacks.toggle')

@@ -22,100 +22,100 @@ local config = {
 
   default_cursor_style = 'BlinkingBar',
 
-  -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda
-  color_scheme = 'Edge Dark (base16)',
+  -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda, Edge Dark (base16), Nord (Gogh), catppuccin-macchiato, Spacedust, SpaceGray Eighties, Everforest Dark (Gogh)
+  color_scheme = 'nordfox',
 
   enable_scroll_bar = true,
   enable_tab_bar = false,
 
-  background = {
-    -- { -- example background file
-    --   source = {
-    --     File = wezterm.config_dir .. '/Firewatch_4k.png',
-    --   },
-    --   height = "Cover",
-    --   width = "Cover",
-    --   hsb = { brightness = 0.1 },
-    -- },
-    {
-      source = {
-        Gradient = {
-          -- orientation = { Linear = { angle = 225.0 } },
-          orientation = "Vertical",
-          -- orientation = { Radial = {cx = 1.0, cy = 0.5, radius = 1.0 } },
-          colors = {
-            --------------------------------------------------------------------
-            -- Teal Radial gradient
-            -- '#3d6596', -- Brighter Tealish
-            -- '#32527a', -- Tealish band
-            -- '#19293d', -- Dark Tealish
-            -- '#070b11', -- Darker Tealish
-            -- '#0a1119', -- Darkest Tealish
-            --------------------------------------------------------------------
-            --------------------------------------------------------------------
-            -- Blue vertical gradient
-            '#0c1b2a', -- dark blue
-            '#102945', -- darkish blue
-            '#175292', -- medium blue
-            '#102945', -- darkish blue
-            '#0c1b2a', -- dark blue
-            '#081728', -- dark dark blue
-
-            --------------------------------------------------------------------
-
-            --------------------------------------------------------------------
-            -- Teal vertical gradient... Turns out these aren't really that Teal
-            -- they just look that way on one of my monitors...
-            -- '#19293d', -- Dark Tealish
-            -- '#32527a', -- Tealish
-            -- '#19293d', -- Dark Tealish
-            -- '#070b11', -- Darker Tealish
-            --------------------------------------------------------------------
-
-            --------------------------------------------------------------------
-            -- Original slanted gradient
-            -- '#0f0c29', -- dark dark blue
-            -- '#1d1944',
-            -- '#2c275e',
-            -- '#302b63',
-            -- '#32527a', -- Tealish
-            -- '#873011', -- Dark Orange
-            -- '#24243e',
-            -- '#0f0c29',
-            --------------------------------------------------------------------
-
-            --------------------------------------------------------------------
-            -- Colors
-            -- '#32527a', -- Tealish
-            -- '#3d6596', -- Brighter Tealish
-            -- '#19293d', -- Dark Tealish
-            -- '#070b11', -- Darker Tealish
-            -- '#0a1119', -- Darkest Tealish
-            --
-            -- '#0f0c29', -- dark dark blue
-            -- '#ad3e16', -- Orange
-            -- '#873011', -- Dark Orange
-            --------------------------------------------------------------------
-
-            -- '#19293d',
-            -- '#0d1621',
-            -- '#070b11',
-          },
-          -- interpolation = 'CatmullRom',
-          -- interpolation = 'Linear',
-          interpolation = 'Basis',
-          noise = 0,
-        },
-      },
-      width = '100%',
-      height= '100%',
-      hsb = {
-        hue = 1.0,
-        saturation = 1.0,
-        brightness = 1.0,
-      },
-    },
-  },
+  -- background = {
+  --   -- { -- example background file
+  --   --   source = {
+  --   --     File = wezterm.config_dir .. '/Firewatch_4k.png',
+  --   --   },
+  --   --   height = "Cover",
+  --   --   width = "Cover",
+  --   --   hsb = { brightness = 0.1 },
+  --   -- },
+  --   {
+  --     source = {
+  --       Gradient = {
+  --         -- orientation = { Linear = { angle = 225.0 } },
+  --         orientation = "Vertical",
+  --         -- orientation = { Radial = {cx = 1.0, cy = 0.5, radius = 1.0 } },
+  --         colors = {
+  --           --------------------------------------------------------------------
+  --           -- Teal Radial gradient
+  --           -- '#3d6596', -- Brighter Tealish
+  --           -- '#32527a', -- Tealish band
+  --           -- '#19293d', -- Dark Tealish
+  --           -- '#070b11', -- Darker Tealish
+  --           -- '#0a1119', -- Darkest Tealish
+  --           --------------------------------------------------------------------
+  --           --------------------------------------------------------------------
+  --           -- Blue vertical gradient
+  --           '#0c1b2a', -- dark blue
+  --           '#102945', -- darkish blue
+  --           '#175292', -- medium blue
+  --           '#102945', -- darkish blue
+  --           '#0c1b2a', -- dark blue
+  --           '#081728', -- dark dark blue
+  --
+  --           --------------------------------------------------------------------
+  --
+  --           --------------------------------------------------------------------
+  --           -- Teal vertical gradient... Turns out these aren't really that Teal
+  --           -- they just look that way on one of my monitors...
+  --           -- '#19293d', -- Dark Tealish
+  --           -- '#32527a', -- Tealish
+  --           -- '#19293d', -- Dark Tealish
+  --           -- '#070b11', -- Darker Tealish
+  --           --------------------------------------------------------------------
+  --
+  --           --------------------------------------------------------------------
+  --           -- Original slanted gradient
+  --           -- '#0f0c29', -- dark dark blue
+  --           -- '#1d1944',
+  --           -- '#2c275e',
+  --           -- '#302b63',
+  --           -- '#32527a', -- Tealish
+  --           -- '#873011', -- Dark Orange
+  --           -- '#24243e',
+  --           -- '#0f0c29',
+  --           --------------------------------------------------------------------
+  --
+  --           --------------------------------------------------------------------
+  --           -- Colors
+  --           -- '#32527a', -- Tealish
+  --           -- '#3d6596', -- Brighter Tealish
+  --           -- '#19293d', -- Dark Tealish
+  --           -- '#070b11', -- Darker Tealish
+  --           -- '#0a1119', -- Darkest Tealish
+  --           --
+  --           -- '#0f0c29', -- dark dark blue
+  --           -- '#ad3e16', -- Orange
+  --           -- '#873011', -- Dark Orange
+  --           --------------------------------------------------------------------
+  --
+  --           -- '#19293d',
+  --           -- '#0d1621',
+  --           -- '#070b11',
+  --         },
+  --         -- interpolation = 'CatmullRom',
+  --         -- interpolation = 'Linear',
+  --         interpolation = 'Basis',
+  --         noise = 0,
+  --       },
+  --     },
+  --     width = '100%',
+  --     height= '100%',
+  --     hsb = {
+  --       hue = 1.0,
+  --       saturation = 1.0,
+  --       brightness = 1.0,
+  --     },
+  --   },
+  -- },
 
   colors = {
     selection_fg = 'black',

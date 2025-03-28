@@ -1,12 +1,27 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
---
+local opt = vim.opt
+opt.shiftwidth = 2
+opt.expandtab = true
+opt.tabstop = 2
+opt.number = true
+opt.relativenumber = true
+opt.smartcase = true
+opt.splitright = true
+opt.signcolumn = "yes:2"
+opt.mouse = "a"
+opt.termguicolors = true
+opt.showmode = false
+opt.colorcolumn = "80,120"
+opt.clipboard = "unnamedplus"
+opt.cursorline = true
+opt.ignorecase = true
+opt.wrap = false
+opt.confirm = true
+opt.laststatus = 3
+-- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
+-- vim.opt.autoformat = false
 
-vim.g.autoformat = false
-vim.o.colorcolumn = "80,120"
-vim.o.guifont = "JetBrainsMono Nerd Font Mono:h16"
-vim.g.neovide_input_macos_alt_is_meta = true
-vim.o.autochdir = true
-vim.g.sonokai_style = 'atlantis'
-vim.g.edge_style = 'default'
+PICKER = "snacks.pick" -- options: telescope.nvim, fzf-lua, mini.pick, snacks.pick
+vim.g.edge_enable_italic = true
+vim.g.edge_style = "neon"
+vim.g.sonokai_style = "atlantis"
+vim.g.sonokai_enable_italic = true

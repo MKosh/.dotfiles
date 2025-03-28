@@ -13,6 +13,7 @@
     export FC=gfortran
     export PERL=perl
     export PYTHON=python3
+    export RIPGREP_CONFIG_PATH=~/.ripgreprc
   '';
 
   programs.zsh = {

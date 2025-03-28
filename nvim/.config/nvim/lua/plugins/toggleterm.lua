@@ -8,6 +8,10 @@ return {
       start_in_insert =true,
       close_on_exit = true,
       autochdir = true,
+      float_opts = {
+        border = "curved",
+      },
     },
   },
 }
+
