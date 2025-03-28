@@ -132,6 +132,7 @@ conflicted = '[$count](fg:base bg:green)'
 modified = '[!$count ](fg:base bg:green)' #
 staged = '[+$count ](fg:base bg:green)'
 untracked = '[?$count ](fg:base bg:green)'
+deleted = '[-$count ](fg:base bg:green)' #✘
 ahead = '[⇡${count} ](fg:base bg:green)'
 behind = '[⇣${count} ](fg:base bg:green)'
 format = '[[($all_status$ahead_behind )](fg:base bg:green)]($style)'
