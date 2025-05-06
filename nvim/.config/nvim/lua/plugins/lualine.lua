@@ -16,6 +16,8 @@ return {
         lualine_c = {
           {
             "diagnostics",
+            -- separator = { left = '', right = ''},
+            -- color = {bg='grey'},
             symbols = {
               error = " ",
               warn  = " ",
@@ -23,7 +25,8 @@ return {
               info  = " ",
             },
           },
-          { function() -- Either show git directory or cwd
+          {
+            function() -- Either show git directory or cwd
               local name = vim.fn.fnamemodify(vim.fs.dirname(vim.fs.find('.git', { upward = true })[1]), ":t")
               if name ~= 'v:null' then
                 return name
@@ -33,6 +36,7 @@ return {
             end },
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           { "filename", file_status = false },
+          { "navic", separator = {left = '', right = ''}, color = 'lualine_a_command' },
         },
 
         lualine_x = {

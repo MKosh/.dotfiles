@@ -261,7 +261,8 @@ set('n', '<C-c>', function() require('dap').continue() end,  { silent = true, de
 set('n', '<leader>dm', function() require('dap').list_breakpoints(true) end, { silent = true, desc = 'List breakpoints'})
 
 -- LSP
-set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Source/Header"})
+set("n", "<leader>ch", "<cmd>ClangdSwitchSourceHeader<CR>", { desc = "Source/Header"} )
+set("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format()<CR>", { desc = "Format"} )
 -- -----------------------------------------------------------------------------
 -- Toggle -  I can't get Snacks.Toogle to work, so I'm just doing a few simple toggles manually
 -- set("n", "<leader>uh", function()

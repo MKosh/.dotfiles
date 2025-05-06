@@ -14,12 +14,12 @@ return {
       },
     },
     config = function()
+      local navic = require('nvim-navic')
       require('lspconfig').lua_ls.setup({})
       require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
       require('lspconfig').cmake.setup({})
       require('lspconfig').zls.setup({})
       require('lspconfig').texlab.setup({})
-      -- require('lspconfig').tectonic.setup({})
       require('lspconfig').clangd.setup({
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {
@@ -70,6 +70,8 @@ return {
             vim.lsp.inlay_hint.enable(false)
           end
 
+          local navic = require('nvim-navic')
+          navic.attach(client, buffer)
           vim.diagnostic.config({
             signs = {
               text = {
