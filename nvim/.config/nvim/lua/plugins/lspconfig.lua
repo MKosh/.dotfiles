@@ -20,6 +20,12 @@ return {
       require('lspconfig').cmake.setup({})
       require('lspconfig').zls.setup({})
       require('lspconfig').texlab.setup({})
+      require('lspconfig').jdtls.setup({
+        flags = {
+          debounce_text_changes = 150,
+          allow_incremental_sync = false,
+        }
+      })
       require('lspconfig').clangd.setup({
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {
