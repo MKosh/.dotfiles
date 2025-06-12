@@ -22,11 +22,9 @@ $haskell\
 $python\
 $nix_shell\
 $lua\
-[](fg:blue)\
-$fill\
-[](fg:pink)\
+[](fg:blue bg:pink)\
 $cmd_duration\
-[](fg:lavender bg:pink)\
+[](fg:pink bg:lavender)\
 $time\
 [](fg:lavender)\
 $line_break$character"""
