@@ -73,3 +73,16 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end,
 })
+
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--   desc = "Set cursorword highlight depending on colorscheme",
+--   callback = function()
+--     local current = vim.g.colors_name or 'default'
+--     if (current == "everforest") then
+--       return
+--     end
+--     if (vim.api.nvim_get_hl(0, {name = "CurrentWord"}) == vim.empty_dict()) then
+--       vim.api.nvim_set_hl(0, "MiniCursorword", {link = "PmenuSel"})
+--     end
+--   end
+-- })

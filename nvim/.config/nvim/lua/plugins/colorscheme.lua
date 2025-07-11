@@ -62,6 +62,7 @@ return {
     config = function()
       require('nordic').load()
       -- require('nordic').setup({
+      --   reduced_blue = false,
       --   bright_border = true,
       -- })
 
