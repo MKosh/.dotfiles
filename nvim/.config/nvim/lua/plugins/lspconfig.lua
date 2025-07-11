@@ -14,12 +14,15 @@ return {
       },
     },
     config = function()
+      vim.lsp.set_log_level("off");
       local navic = require('nvim-navic')
       require('lspconfig').lua_ls.setup({})
       require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
       require('lspconfig').cmake.setup({})
       require('lspconfig').zls.setup({})
       require('lspconfig').texlab.setup({})
+      -- require('lspconfig').prettier.setup({})
+      require('lspconfig').html.setup({})
       require('lspconfig').clangd.setup({
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {

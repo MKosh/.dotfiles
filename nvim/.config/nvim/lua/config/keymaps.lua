@@ -44,7 +44,7 @@ set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next Buffer" })
 set('n', "<leader>|", "<cmd>vsplit<CR>", { desc = "Vertical Split" })
 set('n', "<leader>-", "<cmd>hsplit<CR>", { desc = "Horizontal Split" })
 
--- ---------------------------------------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------
 -- Window size
 set('n', '<M-Down>', '<C-w>-', { silent = true, desc = 'Decrease window height' })
 set('n', '<M-Up>', '<C-w>+', { silent = true, desc = 'Increase window height' })
@@ -57,6 +57,18 @@ set('n', '<C-j>', [[<cmd>wincmd j<CR>]], { silent = true, desc = 'Move window do
 set('n', '<C-h>', [[<cmd>wincmd h<CR>]], { silent = true, desc = 'Move window left' })
 set('n', '<C-k>', [[<cmd>wincmd k<CR>]], { silent = true, desc = 'Move window up' })
 set('n', '<C-l>', [[<cmd>wincmd l<CR>]], { silent = true, desc = 'Move window right' })
+
+-- -----------------------------------------------------------------------------
+-- Move lines up/down
+set('n', '<A-j>', ':m .+1<CR>==', { silent = true, desc = 'Move line down' })
+set('n', '<A-k>', ':m .-2<CR>==', { silent = true, desc = 'Move line up' })
+set('v', '<A-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move line down' })
+set('v', '<A-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move line down' })
+
+-- -----------------------------------------------------------------------------
+-- Better indenting in visual mode
+set("v", "<", "<gv", { desc = "Indent left and reselect" })
+set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- -----------------------------------------------------------------------------
 -- Terminal

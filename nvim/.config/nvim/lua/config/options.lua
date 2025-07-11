@@ -17,6 +17,9 @@ opt.ignorecase = true
 opt.wrap = false
 opt.confirm = true
 opt.laststatus = 3
+opt.foldmethod = "expr"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.foldenable = false
 -- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- vim.opt.autoformat = false
 

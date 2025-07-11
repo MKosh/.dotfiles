@@ -14,13 +14,13 @@ return {
       local git   = require('mini.git').setup({})
       local cursorword = require('mini.cursorword').setup({})
       local extra = require('mini.extra').setup({})
-      local pick  = require('mini.pick').setup({
-        window = {
-          config = {
-            border = "single",
-          },
-        },
-      })
+      -- local pick  = require('mini.pick').setup({
+      --   window = {
+      --     config = {
+      --       border = "single",
+      --     },
+      --   },
+      -- })
       local surround = require('mini.surround').setup({
         mappings = {
           add = "gsa", -- Add surrounding in Normal and Visual modes

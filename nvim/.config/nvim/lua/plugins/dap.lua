@@ -70,11 +70,27 @@ return {
         },
       })
 
+      dap.adapters.perl = {
+        type = 'executable',
+        command = vim.env.MASON .. '/bin/perl-debug-adapter',
+        args = {},
+      }
+
+
       local file = vim.fn.stdpath("data") .. "/debug-args.txt"
       local arr = {}
       for line in io.lines(file) do
         table.insert(arr, line)
       end
+
+      dap.configurations.perl = {
+        {
+          type = 'perl',
+          request = 'launch',
+          name = 'Launch Perl',
+          program = '${workspaceFolder}/${relativeFile}',
+        }
+      }
 
       dap.configurations.cpp = {
         {
