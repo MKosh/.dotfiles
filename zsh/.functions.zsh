@@ -47,4 +47,5 @@ export BAT_THEME="Visual Studio Dark+"
 alias lz="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
 alias ls="eza --color=always --icons=always"
 alias llz="eza --color=always --long --git --icons=always"
-
+alias lg="lazygit"
+alias rr="ranger"

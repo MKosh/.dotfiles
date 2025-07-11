@@ -4,6 +4,16 @@ return {
     -- event = "VeryLazy",
     opts = {
       -- add any options here
+      routes = {
+        {
+          filter = {
+            event = "lsp",
+            kind = "progress",
+            find = "jdtls",
+          },
+          opts = {skip = true},
+        }
+      }
     },
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries

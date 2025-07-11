@@ -9,9 +9,7 @@ $directory\
 [](fg:peach bg:green)\
 $git_branch\
 $git_status\
-[](fg:green)\
-$fill\
-[](fg:blue)\
+[](fg:green bg:blue)\
 $c\
 $rust\
 $golang\
@@ -24,7 +22,9 @@ $haskell\
 $python\
 $nix_shell\
 $lua\
-[](fg:lavender bg:blue)\
+[](fg:blue bg:pink)\
+$cmd_duration\
+[](fg:pink bg:lavender)\
 $time\
 [](fg:lavender)\
 $line_break$character"""
@@ -202,6 +202,10 @@ format = '[[ $symbol( $version) ](fg:base bg:blue)]($style)'
 symbol = ""
 style = "bg:mantle"
 format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[cmd_duration]
+style = "bg:flamingo"
+format = '[[ took ($duration) ](fg:mantle bg:pink)]($style)'
 
 [time]
 disabled = false
