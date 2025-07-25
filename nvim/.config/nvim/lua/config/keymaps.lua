@@ -19,6 +19,7 @@ set('n', '<leader>ff', "<cmd>lua print(vim.fn.getcwd())<CR>", { desc = "Current 
 set('n', '<leader>fd', "<cmd>lua print(vim.fn.expand('%:p:h'))<CR>", { desc = "Current buffer's dir" })
 set('n', '<leader>fc', "<cmd>chdir %:p:h<CR>", { desc = "Change to buf's dir" })
 set({ "n", "i", "s" }, '<esc>', function() vim.cmd("noh") return "<esc>" end, { silent = true, expr = true, desc = "No Highlight" })
+set("n", "<leader>n", ":Notifications<CR>", { desc = "Notifications" })
 
 -- -----------------------------------------------------------------------------
 -- Mini
@@ -162,6 +163,9 @@ set('n', "<leader>sc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("co
 set('n', "<leader>sf", function() Snacks.picker.files({hidden = true}) end, { desc = "Find Files" })
 set('n', "<leader>fg", function() Snacks.picker.git_files() end, { desc = "Find Git Files" })
 set('n', "<leader>fr", function() Snacks.picker.recent() end, { desc = "Recent"  })
+set('n', "<leader>sn", "<cmd>Noice history<CR>", { desc = "Notifications" })
+set('n', "<leader>sp", "<cmd>Noice pick<CR>", { desc = "Notification picker" })
+
 -- git
 set('n', "<leader>gc", function() Snacks.picker.git_log() end, { desc = "Git Log" } )
 set('n', "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })

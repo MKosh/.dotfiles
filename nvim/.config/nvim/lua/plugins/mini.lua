@@ -41,7 +41,7 @@ return {
         },
       })
 
-      local notify = require('mini.notify').setup({})
+      -- local notify = require('mini.notify').setup({})
     end
   },
 

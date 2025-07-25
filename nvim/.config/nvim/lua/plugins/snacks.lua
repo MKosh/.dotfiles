@@ -6,7 +6,7 @@ return {
     lazy = false,
     opts = {
       scratch   = { enabled = true  },
-      notifier  = { enabled = true  },
+      notifier  = { enabled = false  },
       terminal  = { enabled = false },
       bufdelete = { enabled = true  },
       layout    = { enabled = false },
@@ -93,7 +93,7 @@ return {
     keys = {
       { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
       { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-      { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
+      -- { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
       { "<leader>gb", function() Snacks.git.blame_line() end, desc = "Blame line" },
     },
   },

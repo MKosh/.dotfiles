@@ -16,12 +16,16 @@ return {
     config = function()
       vim.lsp.set_log_level("off");
       local navic = require('nvim-navic')
-      require('lspconfig').lua_ls.setup({})
+      require('lspconfig').lua_ls.setup({ })
       require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
       require('lspconfig').cmake.setup({})
       require('lspconfig').zls.setup({})
       require('lspconfig').texlab.setup({})
       require('lspconfig').jdtls.setup({
+        -- handlers = {
+        --   ["language/status"] = function() end,
+        --   ["$/progress"] = function() end,
+        -- },
         flags = {
           debounce_text_changes = 150,
           allow_incremental_sync = false,
