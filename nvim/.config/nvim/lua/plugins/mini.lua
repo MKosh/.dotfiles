@@ -30,7 +30,7 @@ return {
         symbol = '▏',
         draw = {
           -- animation = require('mini.indentscope').gen_animation.none(),
-          animation = require('mini.indentscope').gen_animation.cubic({"in", 10, "total"}),
+          animation = require('mini.indentscope').gen_animation.linear({"in", 10, "total"}),
         },
       })
 
