@@ -88,6 +88,18 @@ return {
 
   {
     "Mofiqul/vscode.nvim",
-  }
+  },
+
+  {
+    "folke/tokyonight.nvim",
+  },
+
+  {
+    "EdenEast/nightfox.nvim",
+  },
+
+  {
+    "nordtheme/vim",
+  },
 
 }
