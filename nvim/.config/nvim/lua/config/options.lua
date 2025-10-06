@@ -24,8 +24,22 @@ opt.swapfile = false
 -- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- vim.opt.autoformat = false
 
-PICKER = "snacks.pick" -- options: telescope.nvim, fzf-lua, mini.pick, snacks.pick
-vim.g.edge_enable_italic = true
-vim.g.edge_style = "neon"
+-- -----------------------------------------------------------------------------
+-- Colorscheme Options
+
+-- sainnhe/edge
+-- vim.g.edge_enable_italic = true
+-- vim.g.edge_style = "neon"
+-- vim.g.edge_style = "aura"
+
+-- sainnhe/everforest
+-- vim.g.everforest_enable_italic = true
+-- vim.g.everforest_background = 'hard'
+-- vim.g.everforest_background = 'medium'
+-- vim.g.everforest_background = 'soft'
+
+-- sainnhe/sonokai
+-- vim.g.sonokai_enable_italic = true
 vim.g.sonokai_style = "atlantis"
-vim.g.sonokai_enable_italic = true
+-- vim.g.sonokai_style = "maia"
+-- vim.g.sonokai_style = "andromeda"

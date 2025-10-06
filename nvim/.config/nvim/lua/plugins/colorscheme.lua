@@ -1,15 +1,5 @@
 return {
 
-  -- Set up catppuccin colorscheme. Set it in lazy.lua (vim.cmd.colorscheme "catppuccin-macchiato")
-  -- {
-  --   "catppuccin/nvim",
-  --   lazy = false,
-  --   name = "catppuccin",
-  --   priority = 100,
-  --   config = function()
-  --     require('catppuccin').setup()
-  --   end
-  -- },
   {
     "catppuccin/nvim",
     lazy = true,
@@ -72,6 +62,9 @@ return {
   {
     "sainnhe/everforest",
     lazy = false,
+    config = function ()
+      vim.g.everforest_enable_italic = true
+    end
   },
 
   {
@@ -84,6 +77,9 @@ return {
 
   {
     "sainnhe/sonokai",
+    -- config = function ()
+    --   vim.g.sonokai_enable_italic = true
+    -- end
   },
 
   {
@@ -101,5 +97,20 @@ return {
   {
     "nordtheme/vim",
   },
+
+  {
+    "rebelot/kanagawa.nvim",
+  },
+
+  {
+    "loctvl842/monokai-pro.nvim",
+  },
+
+  {
+    "navarasu/onedark.nvim",
+    config = function ()
+      require('onedark').setup({ style = 'warm' })
+    end
+  }
 
 }

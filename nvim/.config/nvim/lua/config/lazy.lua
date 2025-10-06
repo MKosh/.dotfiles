@@ -37,9 +37,7 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
--- vim.cmd.colorscheme "catppuccin-macchiato"
--- vim.cmd.colorscheme "nordic"
-vim.cmd.colorscheme "everforest"
+vim.cmd.colorscheme "nordfox"
 
 require('config.options')
 require('config.keymaps')
