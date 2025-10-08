@@ -14,27 +14,22 @@ return {
       },
     },
     config = function()
-      vim.lsp.set_log_level("off");
-      local navic = require('nvim-navic')
-      require('lspconfig').lua_ls.setup({ })
-      require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
-      require('lspconfig').cmake.setup({})
-      require('lspconfig').zls.setup({})
-      require('lspconfig').texlab.setup({})
-      require('lspconfig').jdtls.setup({
-        -- handlers = {
-        --   ["language/status"] = function() end,
-        --   ["$/progress"] = function() end,
-        -- },
-        flags = {
-          debounce_text_changes = 150,
-          allow_incremental_sync = false,
-        }
+      -- vim.lsp.set_log_level("off");
+      -- require('lspconfig').lua_ls.setup({ })
+      -- require('lspconfig').fortls.setup({})
+      -- require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
+      -- require('lspconfig').cmake.setup({})
+      -- require('lspconfig').zls.setup({})
+      -- require('lspconfig').texlab.setup({})
+      -- require('lspconfig').jdtls.setup({
+      -- require('lspconfig').clangd.setup({
+      vim.lsp.config('*', {
+        root_markers = { '.git' },
       })
-      require('lspconfig').clangd.setup({
+      vim.lsp.config.clangd = {
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {
-          "clangd",
+          "/Users/mmekosh/.local/share/nvim/mason/packages/clangd/clangd_20.1.8/bin/clangd",
           "--background-index",
           "--clang-tidy",
           "--header-insertion=iwyu",
@@ -47,16 +42,11 @@ return {
           completeUnimported = true,
           clangdFileStatus = true,
         },
-        -- setup = {
-        --   clangd = function(_, opts)
-        --     -- local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
-        --     -- local clangd_ext_opts = require('clangd_extensions.nvim')
-        --     -- require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
-        --     require('clangd_extensions').setup({})
-        --     return false
-        --   end,
-        -- },
-      })
+      }
+      vim.lsp.config.perlnavigator = {
+        cmd = { 'perlnavigator' }
+      }
+      vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator"})
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
@@ -76,10 +66,10 @@ return {
           --   })
           -- end
 
-          if client.supports_method('textDocument/inlay_hints') then
-            -- vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-            vim.lsp.inlay_hint.enable(false)
-          end
+          -- Keep hints disabled by default
+          -- if vim.lsp.client.supports_method(client, 'textDocument/inlay_hints') then
+          --   vim.lsp.inlay_hint.enable(true)
+          -- end
 
           local navic = require('nvim-navic')
           navic.attach(client, buffer)
