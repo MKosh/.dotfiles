@@ -21,6 +21,7 @@ opt.foldmethod = "expr"
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldenable = false
 opt.swapfile = false
+opt.linebreak = true
 -- vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 -- vim.opt.autoformat = false
 
