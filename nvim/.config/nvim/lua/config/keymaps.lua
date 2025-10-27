@@ -153,6 +153,8 @@ Snacks.toggle.profiler():map("<leader>dpp")
 Snacks.toggle.profiler_highlights():map("<leader>dph")
 Snacks.toggle.inlay_hints():map("<leader>uh")
 
+set('n', "[[", function () Snacks.words.jump(-vim.v.count1) end, { desc = "Prev reference" })
+set('n', "]]", function () Snacks.words.jump(vim.v.count1) end, { desc = "Next reference" })
 set('n', "<leader>,", function() Snacks.picker.buffers() end, { desc = "Buffers" } )
 set('n', "<leader>/", function() Snacks.picker.grep({hidden = true, dirs = {root_dir()} }) print(root_dir()) end, { desc = "Grep" } )
 set('n', "<leader>:", function() Snacks.picker.command_history() end, { desc = "Command History" } )
