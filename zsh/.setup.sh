@@ -1,5 +1,8 @@
 #!/bin/env bash
 
+export PATH="$PATH:/home/markm/.cargo/bin"
+export PATH="$PATH:/home/markm/.local/bin"
+
 terminal_packages=(
   neovim
   eza
@@ -7,6 +10,7 @@ terminal_packages=(
   git-delta
   zsh-syntax-highlighting
   zsh-autosuggestions
+  fd-find
 )
 
 dev_packages=(

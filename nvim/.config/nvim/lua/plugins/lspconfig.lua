@@ -29,7 +29,7 @@ return {
       vim.lsp.config.clangd = {
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {
-          "/Users/mmekosh/.local/share/nvim/mason/packages/clangd/clangd_20.1.8/bin/clangd",
+          "clangd",
           "--background-index",
           "--clang-tidy",
           "--header-insertion=iwyu",
@@ -46,7 +46,7 @@ return {
       vim.lsp.config.perlnavigator = {
         cmd = { 'perlnavigator' }
       }
-      vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator"})
+      vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator", "zls"})
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)

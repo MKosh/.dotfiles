@@ -37,7 +37,7 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-vim.cmd.colorscheme "nordfox"
+vim.cmd.colorscheme "kanagawa"
 
 require('config.options')
 require('config.keymaps')
