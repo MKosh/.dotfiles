@@ -15,6 +15,7 @@ source $ZSH/oh-my-zsh.sh
 source ~/.functions.zsh
 source ~/.fzf-git.sh
 source ~/.setup.sh
+source ~/.local_exports.sh
 
 export EDITOR=nvim
 nn() {

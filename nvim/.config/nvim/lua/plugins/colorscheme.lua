@@ -111,6 +111,14 @@ return {
     config = function ()
       require('onedark').setup({ style = 'warm' })
     end
-  }
+  },
+
+  {
+    "webhooked/kanso.nvim",
+  },
+
+  {
+    "xeind/nightingale.nvim",
+  },
 
 }

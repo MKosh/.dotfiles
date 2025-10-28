@@ -6,11 +6,25 @@ return {
     lazy = false,
     opts = {
       scratch   = { enabled = true  },
-      notifier  = { enabled = false  },
+      notifier  = { enabled = false },
       terminal  = { enabled = false },
       bufdelete = { enabled = true  },
       layout    = { enabled = false },
       images    = { enabled = true  },
+      words     = { enabled = true  },
+      statuscolumn = { enabled = false,
+        left = { "git", "mark", "sign" }, -- priority of signs on the left (high to low)
+        right = { "fold"  }, -- priority of signs on the right (high to low)
+        folds = {
+          open = false, -- show open fold icons
+          git_hl = true, -- use Git Signs hl for fold icons
+        },
+        git = {
+          -- patterns to match Git signs
+          patterns = { "GitSign", "MiniDiffSign" },
+        },
+        refresh = 50, -- refresh at most every 50ms
+      },
 
       -- Indent ----------------------------------------------------------------
       indent = {

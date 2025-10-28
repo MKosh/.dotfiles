@@ -37,10 +37,14 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
-vim.cmd.colorscheme "kanagawa"
-
 require('config.options')
 require('config.keymaps')
 require('config.load')
 require('config.autocmds')
 
+local cs = os.getenv("NVIMCOLOR")
+if (cs ~= nil) then
+  vim.cmd.colorscheme (cs)
+else
+  vim.cmd.colorscheme "everforest"
+end

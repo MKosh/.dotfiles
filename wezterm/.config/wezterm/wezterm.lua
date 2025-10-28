@@ -24,7 +24,7 @@ local config = {
 
   -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda, Edge Dark (base16), Nord (Gogh), catppuccin-macchiato, Spacedust, SpaceGray Eighties, Everforest Dark (Gogh), Atom One Dark
   -- color_scheme = 'nordfox',
-  color_scheme = 'nordic',
+  color_scheme = 'Dark+',
 
   enable_scroll_bar = true,
   enable_tab_bar = false,
@@ -46,10 +46,10 @@ local config = {
     { key = 'j', mods = 'LEADER', action = act.ActivatePaneDirection 'Down' },
     { key = 'k', mods = 'LEADER', action = act.ActivatePaneDirection 'Up' },
     { key = 'l', mods = 'LEADER', action = act.ActivatePaneDirection 'Right' },
-    { key = 'LeftArrow',  mods = 'ALT', action = act.AdjustPaneSize { 'Left', 5} },
-    { key = 'DownArrow',  mods = 'ALT', action = act.AdjustPaneSize { 'Down', 5} },
-    { key = 'UpArrow',    mods = 'ALT', action = act.AdjustPaneSize { 'Up', 5} },
-    { key = 'RightArrow', mods = 'ALT', action = act.AdjustPaneSize { 'Right', 5} },
+    { key = 'LeftArrow',  mods = 'CTRL', action = act.AdjustPaneSize { 'Left', 5} },
+    { key = 'DownArrow',  mods = 'CTRL', action = act.AdjustPaneSize { 'Down', 5} },
+    { key = 'UpArrow',    mods = 'CTRL', action = act.AdjustPaneSize { 'Up', 5} },
+    { key = 'RightArrow', mods = 'CTRL', action = act.AdjustPaneSize { 'Right', 5} },
   }
 }
 
