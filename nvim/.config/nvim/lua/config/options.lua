@@ -30,7 +30,7 @@ opt.linebreak = true
 
 -- sainnhe/edge
 -- vim.g.edge_enable_italic = true
--- vim.g.edge_style = "neon"
+vim.g.edge_style = "neon"
 -- vim.g.edge_style = "aura"
 
 -- sainnhe/everforest

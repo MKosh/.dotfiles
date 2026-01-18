@@ -46,6 +46,9 @@ return {
       vim.lsp.config.perlnavigator = {
         cmd = { 'perlnavigator' }
       }
+      vim.lsp.config["asm-lsp"] = {
+        cmd = { 'asm-lsp' }
+      }
       vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator", "zls"})
 
       vim.api.nvim_create_autocmd("LspAttach", {

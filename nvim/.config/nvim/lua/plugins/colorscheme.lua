@@ -63,12 +63,17 @@ return {
     "sainnhe/everforest",
     lazy = false,
     config = function ()
+      vim.g.everforest_background = 'hard'
       vim.g.everforest_enable_italic = true
     end
   },
 
   {
     "sainnhe/gruvbox-material",
+    config = function ()
+      vim.g.gruvbox_material_brackground = 'hard'
+      vim.g.gruvbox_material_enable_italic = true
+    end
   },
 
   {
@@ -109,7 +114,7 @@ return {
   {
     "navarasu/onedark.nvim",
     config = function ()
-      require('onedark').setup({ style = 'warm' })
+      require('onedark').setup({ style = 'dark' })
     end
   },
 
