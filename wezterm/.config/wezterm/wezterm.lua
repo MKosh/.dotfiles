@@ -22,9 +22,19 @@ local config = {
 
   default_cursor_style = 'BlinkingBar',
 
-  -- other options: Afterglow, Sonokai (Gogh), Apprentice (Gogh), Andromeda, Edge Dark (base16), Nord (Gogh), catppuccin-macchiato, Spacedust, SpaceGray Eighties, Everforest Dark (Gogh), Atom One Dark
-  -- color_scheme = 'nordfox',
-  color_scheme = 'Dark+',
+  -- other options: Afterglow
+  --                Sonokai (Gogh)
+  --                Apprentice (Gogh)
+  --                Andromeda, Edge Dark (base16)
+  --                Nord (Gogh)
+  --                catppuccin-macchiato
+  --                Spacedust
+  --                SpaceGray Eighties
+  --                Everforest Dark (Gogh)
+  --                Atom One Dark
+  --                nordfox
+  --                Dark+
+  color_scheme = 'Nord (Gogh)',
 
   enable_scroll_bar = true,
   enable_tab_bar = false,
