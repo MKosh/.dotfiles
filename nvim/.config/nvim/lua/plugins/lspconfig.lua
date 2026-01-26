@@ -13,19 +13,15 @@ return {
         },
       },
     },
+
     config = function()
       -- vim.lsp.set_log_level("off");
-      -- require('lspconfig').lua_ls.setup({ })
-      -- require('lspconfig').fortls.setup({})
-      -- require('lspconfig').perlnavigator.setup({ cmd = { 'perlnavigator' } })
-      -- require('lspconfig').cmake.setup({})
-      -- require('lspconfig').zls.setup({})
-      -- require('lspconfig').texlab.setup({})
-      -- require('lspconfig').jdtls.setup({
-      -- require('lspconfig').clangd.setup({
+
       vim.lsp.config('*', {
         root_markers = { '.git' },
       })
+
+      -- clangd ----------------------------------------------------------------
       vim.lsp.config.clangd = {
         root_dir = vim.fs.root(vim.fn.getcwd(), ".git"),
         cmd = {
@@ -43,13 +39,40 @@ return {
           clangdFileStatus = true,
         },
       }
+
+      -- perlnavigator ---------------------------------------------------------
       vim.lsp.config.perlnavigator = {
-        cmd = { 'perlnavigator' }
+        cmd = { 'perlnavigator' },
+        filetypes = {'perl'},
+        root_markers = {'.git'},
+        settings = {
+          perlnavigator = {
+            perlPath = 'perl',
+            enableWarnings = true,
+            perltidyProfile = '',
+            perlcriticProfile = '',
+            perlcriticEnabled = true,
+          }
+        }
       }
+
+      -- asm-lsp ---------------------------------------------------------------
       vim.lsp.config["asm-lsp"] = {
         cmd = { 'asm-lsp' }
       }
-      vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator", "zls"})
+
+      -- lua_ls ----------------------------------------------------------------
+      vim.lsp.config.lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = {'vim'}
+            }
+          }
+        }
+      }
+
+      vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator"})
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
@@ -76,6 +99,7 @@ return {
 
           local navic = require('nvim-navic')
           navic.attach(client, buffer)
+
           vim.diagnostic.config({
             signs = {
               text = {
