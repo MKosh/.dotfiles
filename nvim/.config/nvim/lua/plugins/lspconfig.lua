@@ -72,7 +72,7 @@ return {
         }
       }
 
-      vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator"})
+      vim.lsp.enable({"clangd", "jdtls", "lua_ls", "fortls", "cmake", "texlab", "perlnavigator", "tinymist"})
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)

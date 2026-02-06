@@ -32,21 +32,26 @@ return {
         indent = {
           enabled = true,
           char = "▏",
-          only_scope = false,
-          only_current = false,
+          only_scope = true,
+          only_current = true,
           hl = "CocExplorerIndentLine",
         },
         scope = {
-          enabled = false,
+          enabled = true,
           char = "▏",
-          only_current = false,
+          only_current = true,
           hl = "Comment",
         },
         chunk = {
-          enabled = false,
+          enabled = true,
           only_current = true,
           hl = "IndentBlanklineContextChar",
         }
+      },
+
+      -- Scope -----------------------------------------------------------------
+      scope = {
+        enabled = true,
       },
 
       -- Picker ----------------------------------------------------------------

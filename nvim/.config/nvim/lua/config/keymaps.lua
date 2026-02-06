@@ -152,6 +152,20 @@ Snacks.toggle.scroll():map("<leader>uS")
 Snacks.toggle.profiler():map("<leader>dpp")
 Snacks.toggle.profiler_highlights():map("<leader>dph")
 Snacks.toggle.inlay_hints():map("<leader>uh")
+set('n', "<leader>uo",
+  function()
+    -- local scrolloff = vim.api.nvim_set_option_value()
+    local scrolloff = vim.api.nvim_get_option_value("scrolloff", {})
+    if scrolloff == 0 then
+      vim.api.nvim_set_option_value("scrolloff", 999, {})
+      vim.print("Setting scrolloff = 999")
+    elseif scrolloff == 999 then
+      vim.api.nvim_set_option_value("scrolloff", 0, {})
+      vim.print("Setting scrolloff = 0")
+    end
+  end,
+  { desc = "Scrolloff" }
+)
 
 set('n', "[[", function () Snacks.words.jump(-vim.v.count1) end, { desc = "Prev reference" })
 set('n', "]]", function () Snacks.words.jump(vim.v.count1) end, { desc = "Next reference" })
@@ -193,9 +207,79 @@ set('n', "<leader>sR", function() Snacks.picker.resume() end, { desc = "Resume" 
 set('n', "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List" } )
 set('n', "<leader>uC", function() Snacks.picker.colorschemes() end, { desc = "Colorschemes" } )
 set('n', "<leader>qp", function() Snacks.picker.projects() end, { desc = "Projects" } )
+set('n', "<leader>sK", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Config File" })
 -- LSP
 set('n', "gd", function() Snacks.picker.lsp_definitions() end, { desc = "Goto Definition" } )
 set('n', "gr", function() Snacks.picker.lsp_references() end, { nowait = true, desc = "References" } )
 set('n', "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" } )
 set('n', "gy", function() Snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" } )
 set('n', "<leader>ss", function() Snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" } )
+
+
+-- -----------------------------------------------------------------------------
+-- Treesitter ------------------------------------------------------------------
+set({ "n", "x", "o" }, "]f", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+end, { desc = "Next function stat" })
+
+vim.keymap.set({ "n", "x", "o" }, "]]", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
+end, { desc = "Next class start" })
+
+-- You can also pass a list to group multiple queries.
+vim.keymap.set({ "n", "x", "o" }, "]o", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start({"@loop.inner", "@loop.outer"}, "textobjects")
+end, { desc = "Next loop start" })
+
+-- You can also use captures from other query groups like `locals.scm` or `folds.scm`
+-- vim.keymap.set({ "n", "x", "o" }, "]s", function()
+--   require("nvim-treesitter-textobjects.move").goto_next_start("@local.scope", "locals")
+-- end, { desc = "Next scope start" })
+
+vim.keymap.set({ "n", "x", "o" }, "]z", function()
+  require("nvim-treesitter-textobjects.move").goto_next_start("@fold", "folds")
+end, { desc = "Next fold start" })
+
+vim.keymap.set({ "n", "x", "o" }, "]F", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+end, {desc = "Next function end" })
+
+vim.keymap.set({ "n", "x", "o" }, "][", function()
+  require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
+end, {desc = "Next class end" })
+
+vim.keymap.set({ "n", "x", "o" }, "[f", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+end, {desc = "Prev function start" })
+
+vim.keymap.set({ "n", "x", "o" }, "[[", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
+end, {desc = "Prev class start" })
+
+vim.keymap.set({ "n", "x", "o" }, "[F", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+end, {desc = "Prev function end" })
+
+vim.keymap.set({ "n", "x", "o" }, "[]", function()
+  require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
+end, {desc = "Prev class end" })
+--
+-- Go to either the start or the end, whichever is closer.
+vim.keymap.set({ "n", "x", "o" }, "]d", function()
+  require("nvim-treesitter-textobjects.move").goto_next("@conditional.outer", "textobjects")
+end, {desc = "Next conditional" })
+vim.keymap.set({ "n", "x", "o" }, "[d", function()
+  require("nvim-treesitter-textobjects.move").goto_previous("@conditional.outer", "textobjects")
+end, {desc = "Prev conditional" })
+--
+local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
+--
+-- Repeat movement with ; and ,
+set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+
+-- Make builtin f, F, t, T also repeatable with ; and ,
+vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
